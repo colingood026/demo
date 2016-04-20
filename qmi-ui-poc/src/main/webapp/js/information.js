@@ -41,7 +41,7 @@
 		function columnHandler(event){
 		
 			
-			console.log('event='+event);
+			console.log('evednt='+event.column);
 			
 			var xhr=new XMLHttpRequest();
 //			xhr.open('GET','FavoriteAction.action?allColumns='+allColumns,true);
@@ -55,7 +55,7 @@
 		
 	
 		
-		//----改變欄位測試---
+		//----測試改變欄位測試---
 		var bt=document.getElementById('bt');
 		bt.addEventListener('click',function(){			
 			var newcolumnDefs=[
@@ -69,9 +69,10 @@
                 {headerName: "庫存單位", field: "unit", filter: 'text'},
                 {headerName: "色號", field: "color", filter: 'text'},
                 {headerName: "幅寬", field: "width", filter: 'text'},
-    		];			
-			gridOptions.api.setColumnDefs(newcolumnDefs);
-			gridOptions.api.sizeColumnsToFit();
+    		];
+			console.log('newcolumnDefs='+newcolumnDefs);
+//			gridOptions.api.setColumnDefs(newcolumnDefs);
+//			gridOptions.api.sizeColumnsToFit();
 		});
 		
 		//頁面載入時接收資料	
@@ -98,7 +99,7 @@
 			}
 		})
 	
-		//鍵盤紀錄		
+		//按下ctrl+f時聚焦到指定的地方
 		function keyDown(e){
 			//判斷瀏覽器
 			var currKey=0,e=e||event;
@@ -108,7 +109,7 @@
 			if(e.ctrlKey&&currKey==70){				
 				e.preventDefault();//關閉原本的ctrl+f功能
 				var filter=document.getElementById('filter');
-				filter.focus();//按下ctrl+f時聚焦到指定的地方
+				filter.focus();//聚焦到指定的地方
 			}			
 		};
 		document.onkeydown=keyDown;
