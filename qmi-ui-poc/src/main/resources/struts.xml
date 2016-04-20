@@ -20,12 +20,15 @@
             <result>/WEB-INF/jsp/helloWorld.jsp</result>
         </action>
         
-        
+        <!--  -->
         <action name="equipmentAction" class="model.equipmentAction">
 		</action>
 		
 		<action name="LoginAction" class="model.LoginAction">
 			<result name='success'>information.jsp</result>
+			<result name='error'>/WEB-INF/jsp/index.jsp</result>
+		</action>
+		<action name="FavoriteAction" class="model.FavoriteAction">		
 		</action>
 			
     </package>

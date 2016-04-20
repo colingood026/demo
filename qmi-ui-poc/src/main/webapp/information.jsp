@@ -20,7 +20,8 @@
 <body>
 	<!-- 歡迎使用者 -->
 	<h1>Hello! ${accout}</h1><br/>
-
+	<!-- ----改變欄位測試--- -->
+	<button id='bt'>重排</button>
 	<!-- 資料篩選 -->
     <input placeholder="Filter..." type="text"
            onpaste="onFilterChanged(this.value)"
@@ -34,9 +35,9 @@
         <button onclick="onBtExport()">匯出到Excel</button>
     </label>
 	<!-- 登出 -->
-	<input type="button" value='登出'>
+	<input type="button" value='登出' onClick="signOut()">
 	<!-- y 資料呈現 -->
-	<div id="myGrid" style="height: 100%;" class="ag-fresh"></div>
+	<div id="myGrid" style="width:100%;height: 100%;" class="ag-fresh"></div>
 
 <script src="js/ag-grid.js"></script>
 <script src="js/information.js"></script>

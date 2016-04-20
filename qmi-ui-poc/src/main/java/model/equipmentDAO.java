@@ -13,6 +13,7 @@ import java.util.List;
 import org.json.JSONArray;
 
 public class equipmentDAO {
+	private jdbcClose jdbcClose=new jdbcClose();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
@@ -51,38 +52,12 @@ public class equipmentDAO {
 				result.add(bean);
 			}
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) {			
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
-		} finally{			
-			
-			if (rs!=null) {
-				try {
-					rs.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-			}
-			if (stmt!=null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-			}
-			if (conn!=null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-			}
+		} finally{						
+			jdbcClose.allClose(conn, stmt, rs);
 			
 		}		
 		return result;

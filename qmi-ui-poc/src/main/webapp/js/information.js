@@ -13,8 +13,6 @@
 		
 		
 		
-		
-		
 		var gridOptions={
 		    columnDefs: columnDefs,
 		    //排序
@@ -23,8 +21,7 @@
 			//篩選
 			enableFilter: true,
 			//點選一整行
-			rowSelection: 'multiple',			
-	     
+			rowSelection: 'multiple',	     
 		};
 		
 		
@@ -42,11 +39,40 @@
 		
 		//欄位移動
 		function columnHandler(event){
+		
+			
 			console.log('event='+event);
+			
+			var xhr=new XMLHttpRequest();
+//			xhr.open('GET','FavoriteAction.action?allColumns='+allColumns,true);
+//			xhr.send();
+//			xhr.onreadystatechange=function(){
+//				if(xhr.readyState==4&&xhr.status==200){
+//					console.log('jok');
+//				}
+//			}
 		};
 		
+	
 		
-		
+		//----改變欄位測試---
+		var bt=document.getElementById('bt');
+		bt.addEventListener('click',function(){			
+			var newcolumnDefs=[
+                {headerName: "收料日期", field: "buy_date", filter: 'text'},	
+                {headerName: "採購單號", field: "buy_no", filter: 'text'},	
+                {headerName: "基準料號", field: "eq_no", filter: 'text'},               
+                {headerName: "箱號", field: "box_no", filter: 'text'},
+                {headerName: "缸號", field: "cylinder_no", filter: 'text'},
+                {headerName: "儲位", field: "stored", filter: 'text'},
+                {headerName: "庫存量", field: "amount", filter: 'text'},
+                {headerName: "庫存單位", field: "unit", filter: 'text'},
+                {headerName: "色號", field: "color", filter: 'text'},
+                {headerName: "幅寬", field: "width", filter: 'text'},
+    		];			
+			gridOptions.api.setColumnDefs(newcolumnDefs);
+			gridOptions.api.sizeColumnsToFit();
+		});
 		
 		//頁面載入時接收資料	
 		document.addEventListener('DOMContentLoaded',function(){			
@@ -58,10 +84,16 @@
 			xhr.onreadystatechange=function(){
 				if(xhr.readyState == 4 && xhr.status == 200){
 					var data=JSON.parse(xhr.responseText);
+					
 					//將資料塞入表格
-					gridOptions.api.setRowData(data);
+					gridOptions.api.setRowData(data);					
+					gridOptions.api.sizeColumnsToFit();
 					//欄位移動
 					gridOptions.api.addEventListener('columnMoved',columnHandler);
+					
+					
+					
+					
 				}
 			}
 		})
@@ -80,7 +112,10 @@
 			}			
 		};
 		document.onkeydown=keyDown;
-	
-
+		
+		//
+		function signOut(){
+			location.href="";
+		}
 	
 	

@@ -1,3 +1,8 @@
+use master;
+drop database QMI_POC;
+create database QMI_POC;
+use QMI_POC;
+
 create table equipment(
 buy_date datetime,	--收料日期
 buy_no nvarchar(128),	--採購單號
@@ -9,6 +14,12 @@ cylinder_no nvarchar(128),--缸號
 stored nvarchar(128),	--儲位
 amount float,	--庫存量
 unit nvarchar(128)	--庫存單位
+);
+
+create table account(
+account nvarchar(30),	--帳號
+pswd nvarchar(15),	--密碼
+favorite nvarchar(128)	--欄位順序紀錄
 );
 
 insert into equipment values 
@@ -25,3 +36,9 @@ insert into equipment values
 (GETDATE(),'JKU0032L1','PR00657','Black','65.0"',19,'D1','C1-10',63.3,'YDS'),
 (GETDATE(),'JKU0032L1','PR00658','Navy','71.0"',19,'D1','C1-10',45.9,'YDS'),
 (GETDATE(),'JKU0032L1','PR00659','Navy','81.0"',19,'D1','C1-10',123.1,'YDS');
+
+insert into account (account,pswd) values
+('Alex','A'),
+('Bob','B'),
+('Clark','C'),
+('Dude','D')
