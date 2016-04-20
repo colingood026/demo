@@ -6,13 +6,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class accountDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	//
-	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
-	private final String USER="sa";
-	private final String PASSWORD="123qweaS";
-	
+//	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
+//	private final String USER="sa";
+//	private final String PASSWORD="123qweaS";
+	//DataSource
+	private DataSource ds=null;
+	public accountDAO(){
+		try {
+			Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
+		} catch (NamingException e) {			
+			e.printStackTrace();
+		}
+	}	
 	
 	private final String SELECT_BY_ID="select * from account where account=?";
 	public accountVO select_by_id(String id){
@@ -23,7 +37,8 @@ public class accountDAO {
 		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(SELECT_BY_ID);
 			
 			stmt.setString(1, id);

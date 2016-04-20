@@ -8,21 +8,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import org.json.JSONArray;
 
 public class equipmentDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	//
-	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
-	private final String USER="sa";
-	private final String PASSWORD="123qweaS";
+//	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
+//	private final String USER="sa";
+//	private final String PASSWORD="123qweaS";
 	//DataSource
-
-	
-	
-	
+	private DataSource ds=null;
+	public equipmentDAO(){
+		try {
+			Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
+		} catch (NamingException e) {			
+			e.printStackTrace();
+		}
+	}
 	
 	private final String SELECT_ALL="select * from equipment";
 	public List<equipmentVO> select_all(){
@@ -32,7 +40,8 @@ public class equipmentDAO {
 		ResultSet rs=null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(SELECT_ALL);
 			
 			rs=stmt.executeQuery();
@@ -50,8 +59,7 @@ public class equipmentDAO {
 				bean.setUnit(rs.getString("unit"));
 				bean.setWidth(rs.getString("width"));
 				result.add(bean);
-			}
-			
+			}			
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {			
