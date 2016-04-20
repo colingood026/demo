@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myBatis.equipmentMapper">
+ <resultMap type="Equipment" id="equipmentResult">
+  <result property="buy_date" column="buy_date"/>
+  <result property="buy_no" column="buy_no"/>
+  <result property="eq_no" column="eq_no"/>
+  <result property="color" column="color"/>
+  <result property="width" column="width"/>
+  <result property="box_no" column="box_no"/>
+  <result property="cylinder_no" column="cylinder_no"/>
+  <result property="stored" column="stored"/>
+  <result property="amount" column="amount"/>
+  <result property="unit" column="unit"/>
+ </resultMap>
+ 
+ <select id="findAllEquipment" resultMap="equipmentResult">
+  select * from equipment
+ </select>
+ 
+
+</mapper>
