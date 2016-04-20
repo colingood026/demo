@@ -113,9 +113,9 @@
 		};
 		document.onkeydown=keyDown;
 		
-		//
-		function signOut(){
-			location.href="";
+		//登出
+		function signOut(){			
+			location.href="signout.jsp";
 		}
 	
 	

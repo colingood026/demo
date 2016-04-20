@@ -50,8 +50,8 @@ public class LoginAction extends ActionSupport implements SessionAware,RequestAw
 	public String execute() throws Exception {
 		
 		accountVO bean=dao.select_by_id(accout);
-		//比對使用者名稱
-		if(bean==null){
+		
+		if(bean==null){//比對使用者名稱
 			request.put("errorAccount", "無此帳號");
 			return Action.ERROR;
 		}else if(bean.getPswd().equals(password)){//比對使用者密碼
