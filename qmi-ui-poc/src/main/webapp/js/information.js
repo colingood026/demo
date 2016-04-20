@@ -10,7 +10,11 @@
             {headerName: "庫存量", field: "amount", filter: 'text'},
             {headerName: "庫存單位", field: "unit", filter: 'text'},			
 		];
-
+		
+		
+		
+		
+		
 		var gridOptions={
 		    columnDefs: columnDefs,
 		    //排序
@@ -19,8 +23,8 @@
 			//篩選
 			enableFilter: true,
 			//點選一整行
-			rowSelection: 'multiple',
-
+			rowSelection: 'multiple',			
+	     
 		};
 		
 		
@@ -36,6 +40,12 @@
 			gridOptions.api.exportDataAsCsv(params);
 		}
 		
+		//欄位移動
+		function columnHandler(event){
+			console.log('event='+event);
+		};
+		
+		
 		
 		
 		//頁面載入時接收資料	
@@ -50,10 +60,11 @@
 					var data=JSON.parse(xhr.responseText);
 					//將資料塞入表格
 					gridOptions.api.setRowData(data);
+					//欄位移動
+					gridOptions.api.addEventListener('columnMoved',columnHandler);
 				}
 			}
 		})
-
 	
 		//鍵盤紀錄		
 		function keyDown(e){
@@ -66,8 +77,7 @@
 				e.preventDefault();//關閉原本的ctrl+f功能
 				var filter=document.getElementById('filter');
 				filter.focus();//按下ctrl+f時聚焦到指定的地方
-			}
-			
+			}			
 		};
 		document.onkeydown=keyDown;
 	
