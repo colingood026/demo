@@ -47,7 +47,7 @@ public class SaveFavoriteAction extends ActionSupport implements SessionAware {
 		try {//將data轉換Object
 			b=jSONSerializer.toJSON(newColumn);
 		} catch (Exception e) {			
-			System.out.println("jSONSerializer error="+e.toString());
+			System.out.println("SaveFavoriteAction jSONSerializer error="+e.toString());
 		}		
 		JSONArray jSONArray=JSONArray.fromObject(b);//將Object轉換成JsonArray格式
 		for(int i=0;i<jSONArray.size();i++){

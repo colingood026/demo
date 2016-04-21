@@ -125,7 +125,7 @@
 			$.get('CallFavoriteAction.action',{},function(data){
 				//如果使用者上次有移動才重新配置欄位
 				if(data!='none'){
-					var newcolumnDefs=[];
+					var newcolumnDefs=[];//新的欄位位置
 					$.each(data.split(','),function(index,value){
 						newcolumnDefs.push({headerName: getColumnName(value), field: value, filter: 'text'});						
 					})					
@@ -146,6 +146,7 @@
 				e.preventDefault();//關閉原本的ctrl+f功能
 				var filter=$('#filter');
 				filter.focus();//聚焦到指定的地方
+				//加亮搜尋框，1秒後回復原狀
 				filter.addClass('filterShow');
 				var timeOut=setTimeout(function(){
 					filter.removeClass('filterShow');
