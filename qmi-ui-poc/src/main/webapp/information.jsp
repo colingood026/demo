@@ -8,25 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/ag-grid.css">
 <link rel="stylesheet" type="text/css" href="css/theme-fresh.css">
-<style>
-
-    .ag-header-cell-filtered {
-        background-color: #e5e5e5;
-    }
-    #excel{
-  		float:right;		
-	}
-	#signOut{
-  		float:right;		  
-	}
-	#blankDiv{
-		height:10px;
-	}
-/* 	使用者按下ctrl+f之後加亮篩選框 */
-	.filterShow{
-		border:3px solid blue;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="css/information.css">
 
 </head>
 <body>
