@@ -27,6 +27,11 @@
 <body>
 	<!-- 歡迎使用者 -->
 	<h1>Hello! ${bean.account}</h1><br/>
+	<!--  -->
+	<input type='text' placeholder='請輸入基準料號' id='eqNo'>
+	<input type='text' placeholder='請輸入色號' id='colorNo'>
+	<button id='buyNoButton'>搜尋採購單號</button>	
+	<br/>
 	<!-- 資料篩選 -->
     <input placeholder="請輸入篩選條件" type="text"
            onpaste="onFilterChanged(this.value)"

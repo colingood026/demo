@@ -1,6 +1,6 @@
 
-		
-
+		//為了搜尋採購單號之後，清空該搜尋欄之後可以再叫出所有資料
+		rowData=null;
 		//預設欄位位置
 		var columnDefs=[
             {headerName: "收料日期", field: "buy_date", filter: 'text'},	
@@ -22,16 +22,57 @@
 		    sortingOrder: ['desc','asc',null],
 			//篩選
 			enableFilter: true,
+			isExternalFilterPresent: isExternalFilterPresent,
+		    doesExternalFilterPass: doesExternalFilterPass,
 			//點選一整行
 			rowSelection: 'multiple',	     
-		};
-		
-		
+		};		
 		//使用者輸入篩選條件
 		function onFilterChanged(value) {
-		    gridOptions.api.setQuickFilter(value);
-		}				
-		
+		    gridOptions.api.setQuickFilter(value);		  
+		}
+		//搜尋基準料號，色號
+		eqNo=null;
+		colorNo=null;
+		$('#buyNoButton').on('click',externalFilterChanged);		
+		function isExternalFilterPresent(){
+			//回傳true才會觸發下面的function doesExternalFilterPass
+			if(eqNo!=null||colorNo!=null){			
+				return true;
+			}else{
+				//清空該搜尋欄之後可以再叫出所有資料
+				//rowData為全域變數在第3行
+				gridOptions.api.setRowData(rowData);
+				gridOptions.api.sizeColumnsToFit();
+			}
+		}		
+		function doesExternalFilterPass(node){
+			//顯示搜尋採購單號搜尋結果
+			if(eqNo!=null&&colorNo!=null){
+				gridOptions.api.sizeColumnsToFit();
+				return node.data.eq_no==eqNo&&node.data.color==colorNo;
+			}else if(eqNo!=null){
+				gridOptions.api.sizeColumnsToFit();
+				return node.data.eq_no==eqNo;	
+			}else if(colorNo!=null){
+				gridOptions.api.sizeColumnsToFit();
+				return node.data.color==colorNo;
+			}			
+		}
+		function externalFilterChanged(newvalue){
+			//接著觸發function isExternalFilterPresent
+			if($('#eqNo').val().length!=0){
+				eqNo=$('#eqNo').val();
+			}else{
+				eqNo=null;
+			}
+			if($('#colorNo').val().length!=0){
+				colorNo=$('#colorNo').val();
+			}else{
+				colorNo=null;
+			}
+			gridOptions.api.onFilterChanged();
+		}
 		
 		//輸出excel
 		function onBtExport(){
@@ -64,7 +105,8 @@
 				case 'cylinder_no':return '缸號';
 				case 'stored':return '儲位';
 				case 'amount':return '庫存量';
-				case 'unit':return '庫存單位';				
+				case 'unit':return '庫存單位';	
+				default : return 'none';
 			}
 		}
 		//頁面載入時接收資料	
@@ -72,7 +114,8 @@
 			var gridDiv=document.querySelector('#myGrid');
 			new agGrid.Grid(gridDiv, gridOptions);	
 			//將資料塞入表格
-			$.post('equipmentAction.action',{},function(data){			
+			$.post('equipmentAction.action',{},function(data){
+				rowData=data;//rowData為全域變數在第3行
 				gridOptions.api.setRowData(data);					
 				gridOptions.api.sizeColumnsToFit();				
 			});			
@@ -85,7 +128,7 @@
 					var newcolumnDefs=[];
 					$.each(data.split(','),function(index,value){
 						newcolumnDefs.push({headerName: getColumnName(value), field: value, filter: 'text'});						
-					})
+					})					
 					gridOptions.api.setColumnDefs(newcolumnDefs);
 				}				
 			})
