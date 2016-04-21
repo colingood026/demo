@@ -17,7 +17,7 @@
 <%-- 	</s:form> --%>
 	<form action='LoginAction.action' method='post'>
 		<input type='text' name='accout' placeholder='帳號' value='${param.accout}'><label>${errorAccount}</label><br/>
-		<input type='text' name='password' placeholder='密碼'><label>${errorPSWD}</label><br/>
+		<input type='password' name='password' placeholder='密碼'><label>${errorPSWD}</label><br/>
 		<input type='submit' value='登入'>
 	
 	</form>

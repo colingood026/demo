@@ -1,4 +1,4 @@
-
+		
 		//為了搜尋採購單號之後，清空該搜尋欄之後可以再叫出所有資料
 		rowData=null;
 		//預設欄位位置
@@ -130,6 +130,7 @@
 						newcolumnDefs.push({headerName: getColumnName(value), field: value, filter: 'text'});						
 					})					
 					gridOptions.api.setColumnDefs(newcolumnDefs);
+					gridOptions.api.sizeColumnsToFit();
 				}				
 			})
 		})
@@ -143,8 +144,12 @@
 			var F_KEY=70;
 			if(e.ctrlKey&&currKey==F_KEY){				
 				e.preventDefault();//關閉原本的ctrl+f功能
-				var filter=document.getElementById('filter');
+				var filter=$('#filter');
 				filter.focus();//聚焦到指定的地方
+				filter.addClass('filterShow');
+				var timeOut=setTimeout(function(){
+					filter.removeClass('filterShow');
+				},1000);
 			}			
 		};
 		document.onkeydown=keyDown;
