@@ -56,7 +56,7 @@ public class LoginAction extends ActionSupport implements SessionAware,RequestAw
 			return Action.ERROR;
 		}else if(bean.getPswd().equals(password)){//比對使用者密碼
 			//存入使用者名稱
-			session.put("accout", accout);
+			session.put("bean", bean);
 			return Action.SUCCESS;
 		}else{
 			request.put("errorPSWD", "密碼錯誤");

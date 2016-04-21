@@ -26,9 +26,7 @@
 </head>
 <body>
 	<!-- 歡迎使用者 -->
-	<h1>Hello! ${accout}</h1><br/>
-	<!-- ----測試改變欄位測試--- -->
-	<button id='bt'>重排</button>
+	<h1>Hello! ${bean.account}</h1><br/>
 	<!-- 資料篩選 -->
     <input placeholder="請輸入篩選條件" type="text"
            onpaste="onFilterChanged(this.value)"
@@ -47,6 +45,7 @@
 	<div id="myGrid" style="width:100%;height: 100%;" class="ag-fresh"></div>
 
 <script src="js/ag-grid.js"></script>
+<script src="js/jquery-2.2.3.js"></script>
 <script src="js/information.js"></script>
 </body>
 </html>

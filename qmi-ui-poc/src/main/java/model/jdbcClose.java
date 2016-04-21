@@ -6,6 +6,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class jdbcClose {
+	
+	
+	public void partClose(Connection conn,PreparedStatement stmt){
+		if (stmt!=null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		if (conn!=null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+	}
+	
+	
+	
+	
 	public void allClose(Connection conn,PreparedStatement stmt,ResultSet rs){
 		if (rs!=null) {
 			try {
