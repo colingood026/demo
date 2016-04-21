@@ -49,8 +49,8 @@
 			
 			var jsonString=JSON.stringify(newColumn);
 			console.log('jsonString='+jsonString);
-			$.post('SaveFavoriteAction.action',{'newColumn':jsonString},function(){				
-			});
+			//呼叫ajax，將使用者的習慣存入DB
+			$.post('SaveFavoriteAction.action',{'newColumn':jsonString},function(){});
 		};
 		//
 		function getColumnName(name){
@@ -97,8 +97,8 @@
 			var currKey=0,e=e||event;
 			currKey=e.keyCode||e.which||e.charCode;
 			//var keyName=String.fromCharCode(currKey);
-			
-			if(e.ctrlKey&&currKey==70){				
+			var F_KEY=70;
+			if(e.ctrlKey&&currKey==F_KEY){				
 				e.preventDefault();//關閉原本的ctrl+f功能
 				var filter=document.getElementById('filter');
 				filter.focus();//聚焦到指定的地方
