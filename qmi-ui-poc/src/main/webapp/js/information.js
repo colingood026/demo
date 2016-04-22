@@ -44,7 +44,7 @@
 		$('#buyNoButton').on('click',externalFilterChanged);		
 		function isExternalFilterPresent(){
 			//rowData為全域變數在第3行
-			gridOptions.api.setRowData(rowData);
+//			gridOptions.api.setRowData(rowData);
 			//回傳true才會觸發下面的function doesExternalFilterPass
 			if(MAT_01!=null||COL_NO!=null){			
 				return true;
@@ -121,7 +121,7 @@
 			$.post('INV_ITEM_Action.action',{},function(data){
 				
 				rowData=data;//rowData為全域變數在第3行	
-//				gridOptions.api.setRowData(rowData);				
+				gridOptions.api.setRowData(rowData);				
 			});			
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
