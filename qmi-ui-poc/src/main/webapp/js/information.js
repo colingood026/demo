@@ -3,17 +3,18 @@
 		rowData=null;
 		//預設欄位位置
 		var columnDefs=[
-            {headerName: "收料日期", field: "REC_DATE", filter: 'text'},	
-            {headerName: "採購單號", field: "PUR_NO", filter: 'text'},	
-            {headerName: "基準料號", field: "MAT_01", filter: 'text'},
-            {headerName: "色號", field: "COL_NO", filter: 'text'},
-            {headerName: "幅寬", field: "WID_TH", filter: 'text'},
-            {headerName: "箱號", field: "CNT_NO", filter: 'text'},
-            {headerName: "缸號", field: "LOT_ID", filter: 'text'},
-            {headerName: "儲位", field: "LOC_CODE", filter: 'text'},
-            {headerName: "庫存量", field: "STOCK_QTY", filter: 'text'},
-            {headerName: "庫存單位", field: "UNT_RQ", filter: 'text'},			
+            {headerName: "收料日期", field: "REC_DATE"},	
+            {headerName: "採購單號", field: "PUR_NO"},	
+            {headerName: "基準料號", field: "MAT_01"},
+            {headerName: "色號", field: "COL_NO"},
+            {headerName: "幅寬", field: "WID_TH"},
+            {headerName: "箱號", field: "CNT_NO"},
+            {headerName: "缸號", field: "LOT_ID"},
+            {headerName: "儲位", field: "LOC_CODE"},
+            {headerName: "庫存量", field: "STOCK_QTY"},
+            {headerName: "庫存單位", field: "UNT_RQ"},			
 		];
+		
 		//grid設定
 		var gridOptions={
 		    columnDefs: columnDefs,
@@ -30,7 +31,8 @@
 			suppressLoadingOverlay:true,
 			//大範圍選取
 			enableRangeSelection: true,
-
+			 //當群組時會顯示目前是用哪個欄位做群組
+			rowGroupPanelShow:'onlyWhenGrouping',
 		};		
 		//使用者輸入篩選條件
 		function onFilterChanged(value) {
@@ -42,7 +44,7 @@
 		$('#buyNoButton').on('click',externalFilterChanged);		
 		function isExternalFilterPresent(){
 			//rowData為全域變數在第3行
-//			gridOptions.api.setRowData(rowData);
+			gridOptions.api.setRowData(rowData);
 			//回傳true才會觸發下面的function doesExternalFilterPass
 			if(MAT_01!=null||COL_NO!=null){			
 				return true;
@@ -110,7 +112,6 @@
 		}
 		//頁面載入時接收資料
 		$(function(){
-			console.log('haha');
 			var gridDiv=document.querySelector('#myGrid');
 			//建立表格
 			new agGrid.Grid(gridDiv, gridOptions);
@@ -120,8 +121,7 @@
 			$.post('INV_ITEM_Action.action',{},function(data){
 				
 				rowData=data;//rowData為全域變數在第3行	
-				console.log('rowData='+rowData);
-				gridOptions.api.setRowData(rowData);				
+//				gridOptions.api.setRowData(rowData);				
 			});			
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
@@ -138,15 +138,11 @@
 				}				
 			})			
 		})
-		
-
-
 		//按下ctrl+f時聚焦到指定的地方
 		function keyDown(e){
 			//判斷瀏覽器
 			var currKey=0,e=e||event;
 			currKey=e.keyCode||e.which||e.charCode;
-			//var keyName=String.fromCharCode(currKey);
 			var F_KEY=70;
 			if(e.ctrlKey&&currKey==F_KEY){				
 				e.preventDefault();//關閉原本的ctrl+f功能
@@ -156,7 +152,7 @@
 				filter.addClass('filterShow');
 				var timeOut=setTimeout(function(){
 					filter.removeClass('filterShow');
-				},1000);
+				},500);
 			}			
 		};
 		document.onkeydown=keyDown;
