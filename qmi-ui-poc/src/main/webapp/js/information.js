@@ -1,4 +1,4 @@
-		
+		gridDiv=null;
 		//為了搜尋採購單號之後，清空該搜尋欄之後可以再叫出所有資料
 		rowData=null;
 		//預設欄位位置
@@ -23,8 +23,6 @@
 		    sortingOrder: ['desc','asc',null],
 			//篩選
 			enableFilter: true,
-			isExternalFilterPresent: isExternalFilterPresent,
-		    doesExternalFilterPass: doesExternalFilterPass,
 			//點選一整行
 			rowSelection: 'multiple',
 			//關閉loading畫面
@@ -39,47 +37,18 @@
 		    gridOptions.api.setQuickFilter(value);		  
 		}
 		//搜尋基準料號，色號
-		MAT_01=null;
-		COL_NO=null;
-		$('#buyNoButton').on('click',externalFilterChanged);		
-		function isExternalFilterPresent(){
-			//rowData為全域變數在第3行
-//			gridOptions.api.setRowData(rowData);
-			//回傳true才會觸發下面的function doesExternalFilterPass
-			if(MAT_01!=null||COL_NO!=null){			
-				return true;
-			}
-		}		
-		function doesExternalFilterPass(node){
-			//顯示搜尋採購單號搜尋結果
-			if(MAT_01!=null&&COL_NO!=null){				
-				return node.data.MAT_01==MAT_01&&node.data.COL_NO==COL_NO;
-			}else if(MAT_01!=null){				
-				return node.data.MAT_01==MAT_01;	
-			}else if(COL_NO!=null){				
-				return node.data.COL_NO==COL_NO;
-			}			
-		}
-		function externalFilterChanged(newvalue){
-			//接著觸發function isExternalFilterPresent
-			if($('#MAT_01').val().length!=0){
-				MAT_01=$('#MAT_01').val();
-			}else{
-				MAT_01=null;
-			}
-			if($('#COL_NO').val().length!=0){
-				COL_NO=$('#COL_NO').val();
-			}else{
-				COL_NO=null;
-			}
-			gridOptions.api.onFilterChanged();
+
+		$('#buyNoButton').on('click',getData);		
+		function getData(){
+			var MAT_01=$('#MAT_01').val();
+			var COL_NO=$('#COL_NO').val();			
+			$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
+				gridOptions.api.setRowData(data);
+			});	
+			
 		}
 		
-		//輸出excel
-		function onBtExport(){
-			var params={};			
-			gridOptions.api.exportDataAsCsv(params);
-		}
+		
 		
 		//欄位移動
 		function columnHandler(event){
@@ -87,8 +56,7 @@
 			var newColumn=[];//要存入DB的欄位
 			$.each(change,function(key,value){
 				newColumn.push(value.colId);				
-			})
-			
+			})			
 			var jsonString=JSON.stringify(newColumn);
 			console.log('jsonString='+jsonString);
 			//呼叫ajax，將使用者的習慣存入DB
@@ -112,17 +80,11 @@
 		}
 		//頁面載入時接收資料
 		$(function(){
-			var gridDiv=document.querySelector('#myGrid');
+			gridDiv=document.querySelector('#myGrid');
 			//建立表格
 			new agGrid.Grid(gridDiv, gridOptions);
 			gridOptions.api.setColumnDefs(columnDefs);
-			gridOptions.api.sizeColumnsToFit();
-			//將資料塞入表格
-			$.post('INV_ITEM_Action.action',{},function(data){
-				
-				rowData=data;//rowData為全域變數在第3行	
-				gridOptions.api.setRowData(rowData);				
-			});			
+			gridOptions.api.sizeColumnsToFit();	
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
 			//呼叫使用者上次移動的欄位位置
@@ -138,6 +100,7 @@
 				}				
 			})			
 		})
+
 		//按下ctrl+f時聚焦到指定的地方
 		function keyDown(e){
 			//判斷瀏覽器
@@ -156,7 +119,11 @@
 			}			
 		};
 		document.onkeydown=keyDown;
-		
+		//excel
+		function onBtExport(){
+			var params={};
+			gridOptions.api.exportDataAsCsv(params);
+		}
 		//登出
 		function signOut(){			
 			location.href="signout.jsp";
