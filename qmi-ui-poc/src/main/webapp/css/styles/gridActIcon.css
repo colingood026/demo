@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+
+.gridImgBtn{
+	vertical-align:middle;
+}
+
+
+.gridImgBtn img{
+	width:16px;
+	height:16px;
+	overflow:hidden;
+	background:url(../images/icon_gridAction.png) 0 0 none no-repeat;
+	vertical-align:middle;
+	border:0;
+	padding:0;
+	border:0;
+	vertical-align:middle;
+	
+}
+
+.gridImgBtn img.delete{
+	background:url(../images/icon_gridAction.png) 0 0 no-repeat;
+}
+
+
+.gridImgBtn img.add{
+	background:url(../images/icon_gridAction.png) -16px 0  no-repeat;
+}
+
+.gridImgBtn img.check{
+    background:url(../images/icon_gridAction.png) -32px 0  no-repeat;
+}
+
+
+.gridImgBtn img:hover {
+	background-position-y:-16px;
+}
+

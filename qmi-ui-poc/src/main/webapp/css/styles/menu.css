@@ -1,0 +1,151 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+#mega-menu {
+    font: bold 110% "微軟正黑體", Arial, sans-serif;
+    list-style: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-left: 1%;
+    float: left;
+}
+
+#mega-menu li ul, #mega-menu .sub {
+    display: none;
+
+}
+
+#mega-menu .sub ul {
+    display: block;
+    width: auto;
+    margin-right: 2%;
+    float: left;
+}
+
+#mega-menu {
+    height: 30px;
+}
+
+#mega-menu li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#mega-menu li.last {
+    border-right: 0;
+}
+
+#mega-menu li a {
+    float: left;
+    display: block;
+    color: #fff;
+    padding: 11px 10px;
+    text-decoration: none;
+}
+
+#mega-menu li.mega-hover a, #mega-menu li a:hover {
+    background: url(../images/menuLIhoverBg.gif) repeat-x 0 0;
+    color: #012245;
+    background-color: #009cff;
+
+}
+
+#mega-menu li .sub-container {
+    position: absolute;
+    top: -1px;
+}
+
+#mega-menu li .sub {
+    background: #ffffff;
+    padding: 10px;
+    border: 1px solid #003974;
+    border-top: 0;
+
+}
+
+#mega-menu li .sub .row {
+    width: 100%;
+    overflow: hidden;
+    clear: both;
+}
+
+#mega-menu li .sub li {
+    list-style: none;
+    float: none;
+    width: 180px;
+    font-size: 1em;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+#mega-menu li .sub li.mega-hdr {
+    margin: 0 5px;
+    float: left;
+}
+
+#mega-menu li .sub a {
+    background: none;
+    color: #3e4958;
+    padding: 0;
+    display: block;
+    float: none;
+    font-size: 0.9em;
+}
+
+#mega-menu li .sub li.mega-hdr a.mega-hdr-a {
+    padding: 5px 10px;
+    border-bottom: 3px solid #e5e5e5;
+    font-weight: bold;
+    color: #3e4958;
+}
+
+#mega-menu li .sub li.mega-hdr a.mega-hdr-a:hover {
+    color: #000;
+}
+
+#mega-menu li ul {
+    padding: 5px 0;
+}
+
+#mega-menu .sub li.mega-hdr li a {
+    padding: 4px 5px;
+    font-weight: normal;
+    color: #3e4958;
+}
+
+#mega-menu .sub li.mega-hdr li a:hover {
+    color: #009cff;
+}
+
+#mega-menu .sub ul li {
+    padding-right: 0;
+
+}
+
+#mega-menu li .sub-container.non-mega .sub {
+    padding: 0;
+}
+
+#mega-menu li .sub-container.non-mega li {
+    padding: 0;
+    width: auto;
+    margin: 0;
+}
+
+#mega-menu li .sub-container.non-mega li a {
+    padding: 5px 20px;
+    white-space: nowrap;
+}
+
+#mega-menu li .sub-container.non-mega li a:hover {
+    color: #009cff;
+}
+
+#mega-menu li a:hover img {
+    background-position-y: -24px;
+}

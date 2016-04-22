@@ -2,9 +2,11 @@
         background-color: #e5e5e5;
     }
     #excel{
+    	margin-right:5px;
   		float:right;		
 	}
 	#signOut{
+		margin-right:5px;
   		float:right;		  
 	}
 	#blankDiv{

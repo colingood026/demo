@@ -1,0 +1,25 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+.ui-jqgrid-caption{
+    background:white;
+    color:'';
+}
+.ui-jqgrid-title {
+    font-size : 14px;
+    color : #003974;
+}
+.ui-jqgrid-titlebar-close{
+    display:none;    
+}
+.jqgrid-container{
+	width:100%;
+	box-sizing:border-box;
+	overflow:hidden;
+	float: left;
+}
+.jqgrid-container .css_btn{
+	font-size:100%;
+	margin-left: 5px;
+}

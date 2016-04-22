@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+.tablescroll
+{ width:99%;
+	}
+
+.tablescroll td, 
+.tablescroll_wrapper,
+.tablescroll_head,
+.tablescroll_foot
+{ border:1px solid #efefef; }
+
+.tablescroll td
+{ padding:2px 5px; }
+
+.tablescroll_wrapper
+{ border-left:0; }
+
+.tablescroll_head
+{ padding:3px;
+	background-color:#003;
+	color:#ffffff;
+	white-space:nowrap; }
+
+.tablescroll thead td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody tr.first td
+{ border-top:0; }
+
+.tablescroll_foot
+{ font-weight:bold; background-color:#eee; border-left:0; border-top:0; margin-top:3px; }
+
+.tablescroll tfoot td
+{ border-right:0; border-bottom:0; }

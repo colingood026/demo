@@ -1,0 +1,205 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+@charset "utf-8";
+
+.queryForm{
+	width:100%;
+	float:left;
+}
+
+
+.queryForm td{
+	padding:3px 5px;
+	vertical-align:top;
+}
+
+.queryForm input[type=text],
+.queryForm input[type=password],
+.queryForm select{
+	border:1px solid #ededed;
+}
+
+.grid_list_head{
+	width:100%;
+	border-collapse:collapse;
+	float:left;
+	margin:auto;
+	border:2px solid #e5e5e5;
+	margin-bottom:2%;
+	float:left;
+	margin-right:1%;
+}
+
+.grid_list_head th{
+	padding:3px 5px;
+	color:#003;
+	text-align:left;
+	background-color:#e5e5e5;
+	border-bottom:1px dotted #fff;
+	vertical-align:top;
+	
+}
+
+
+
+.grid_list_head td{
+	padding:3px 5px;
+	border-bottom:1px solid #e5e5e5;
+	vertical-align:top;
+}
+
+.grid_list{
+	width:100%;
+	border-collapse:collapse;
+	float:left;
+	margin:auto;
+}
+
+.grid_list th,
+.grid_list th a {
+	padding:3px;
+	background-color:#003;
+	color:#ffffff;
+	border-right:1px solid #012245;
+	white-space:nowrap;
+	font-size:94%;
+}
+
+
+
+.grid_list td{
+	padding:2px 5px;
+	border:1px solid #efefef;
+}
+
+
+
+.grid_list td input[type=text]{
+	width:90%;
+	margin:auto;
+	border:1px solid #c7c7c7;
+	vertical-align:middle;
+}
+
+.grid_list td a:link,
+.grid_list td a:visited{
+	text-decoration:none;
+}
+
+.grid_list td a:hover,
+.grid_list td a:active{
+	text-decoration:none;
+}
+
+.grid_list tr.expired{
+	background-color:#ffd9bb;
+}
+
+.grid_list tr background{
+	background-color:none;
+}
+
+.grid_list tr.on{
+	background-color:#a6d7f1;
+}
+
+.grid_list tr.on input[type=text]{
+	background-color:#e1f4fc;
+	border:1px solid #e1f4fc;
+}
+
+.gird_list tr.subRow{
+	text-align:left;
+	background-color:#f7f7f7;
+}
+
+
+.grid_list .subRow td{
+	background-color:#cdcdcd;
+}
+
+.grid_list .expand{
+	background:url(../images/icon_rowExpand.png) 0 0 no-repeat;
+	overflow:hidden;
+}
+
+
+.grid_list .collapse{
+	background:url(../images/icon_rowExpand.png) 0 -22px no-repeat;
+	overflow:hidden;
+}
+
+.masterList input[type=text]{
+	background-color:#f3f5f6;
+}
+
+.subList{
+	width:96%;
+	float:right;
+	border-collapse:collapse;
+	margin:10px;
+}
+
+.subList th{
+	background:none;
+	text-align:center;
+	line-height:12px;
+	border-bottom:2px solid #ffffff;
+	color:#000000;
+	border-right:0;
+}
+
+.subList td{
+	border:0;
+	border-bottom:1px solid #ffffff;
+	padding:2px;
+}
+
+
+.subList tr.reply{
+	background-color:#9f9b80;
+}
+
+.subList td img{
+	vertical-align:middle;
+}
+
+
+.thirdList{
+	width:96%;
+	float:right;
+	border-collapse:collapse;
+	margin:10px;
+}
+
+.thirdList th{
+	background:#909090;
+	color:#ffffff;
+	text-align:center;
+	line-height:12px;
+	border-bottom:2px solid #909090;
+}
+
+.thirdList td{
+	border:0;
+	border-bottom:1px solid #909090;
+}
+
+
+.thirdList tr.reply{
+	background-color:#9f9b80;
+}
+
+.thirdList td img{
+	margin-left:8px;
+	vertical-align:middle;
+}
+
+
+
+
+
+
+

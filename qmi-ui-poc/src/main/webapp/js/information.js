@@ -25,7 +25,9 @@
 			isExternalFilterPresent: isExternalFilterPresent,
 		    doesExternalFilterPass: doesExternalFilterPass,
 			//點選一整行
-			rowSelection: 'multiple',	     
+			rowSelection: 'multiple',
+			//關閉loading畫面
+			suppressLoadingOverlay:true
 		};		
 		//使用者輸入篩選條件
 		function onFilterChanged(value) {
@@ -36,26 +38,20 @@
 		colorNo=null;
 		$('#buyNoButton').on('click',externalFilterChanged);		
 		function isExternalFilterPresent(){
+			//rowData為全域變數在第3行
+			gridOptions.api.setRowData(rowData);
 			//回傳true才會觸發下面的function doesExternalFilterPass
 			if(eqNo!=null||colorNo!=null){			
 				return true;
-			}else{
-				//清空該搜尋欄之後可以再叫出所有資料
-				//rowData為全域變數在第3行
-				gridOptions.api.setRowData(rowData);
-				gridOptions.api.sizeColumnsToFit();
 			}
 		}		
 		function doesExternalFilterPass(node){
 			//顯示搜尋採購單號搜尋結果
-			if(eqNo!=null&&colorNo!=null){
-				gridOptions.api.sizeColumnsToFit();
+			if(eqNo!=null&&colorNo!=null){				
 				return node.data.eq_no==eqNo&&node.data.color==colorNo;
-			}else if(eqNo!=null){
-				gridOptions.api.sizeColumnsToFit();
+			}else if(eqNo!=null){				
 				return node.data.eq_no==eqNo;	
-			}else if(colorNo!=null){
-				gridOptions.api.sizeColumnsToFit();
+			}else if(colorNo!=null){				
 				return node.data.color==colorNo;
 			}			
 		}
@@ -109,15 +105,13 @@
 				default : return 'none';
 			}
 		}
-		//頁面載入時接收資料	
+		//頁面載入時接收資料
 		document.addEventListener('DOMContentLoaded',function(){			
 			var gridDiv=document.querySelector('#myGrid');
 			new agGrid.Grid(gridDiv, gridOptions);	
 			//將資料塞入表格
 			$.post('equipmentAction.action',{},function(data){
-				rowData=data;//rowData為全域變數在第3行
-				gridOptions.api.setRowData(data);					
-				gridOptions.api.sizeColumnsToFit();				
+				rowData=data;//rowData為全域變數在第3行			
 			});			
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);

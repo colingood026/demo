@@ -9,7 +9,11 @@
 <link rel="stylesheet" type="text/css" href="css/ag-grid.css">
 <link rel="stylesheet" type="text/css" href="css/theme-fresh.css">
 <link rel="stylesheet" type="text/css" href="css/information.css">
-
+<link rel="stylesheet" type="text/css" href="<c:url value='css/styles/displaytag.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='css/styles/default.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='css/styles/ui.jqgrid.custom.css'/>"  />
+<link rel="stylesheet" type="text/css" href="<c:url value='css/styles/font-awesome/css/font-awesome.css'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='css/styles/jquery.multiselect.filter.css'/>" />
 </head>
 <body>
 	<!-- 歡迎使用者 -->
@@ -18,7 +22,7 @@
 	<div>
 		<input type='text' placeholder='請輸入基準料號' id='eqNo'>
 		<input type='text' placeholder='請輸入色號' id='colorNo'>
-		<button id='buyNoButton'>搜尋採購單號</button>	
+		<button id='buyNoButton' class='css_btn'>搜尋</button>	
 		<br/>
 		<!-- 資料篩選 -->
 	    <input placeholder="請輸入篩選條件" type="text"
@@ -29,10 +33,10 @@
 	           onkeydown="onFilterChanged(this.value)"
 	           onkeyup="onFilterChanged(this.value)" id='filter'/>
 	    <!-- 登出 -->
-		<input type="button" value='登出' onClick="signOut()" id='signOut'>
+		<button onClick="signOut()" id='signOut' class='css_btn'>登出</button>
 		<!-- 輸出excel -->
 	    <label>
-	        <button onclick="onBtExport()" id='excel'>匯出到Excel</button>
+	        <button onclick="onBtExport()" id='excel' class='css_btn'>匯出到Excel</button>
 	    </label>
   	</div>
   	<!--  -->

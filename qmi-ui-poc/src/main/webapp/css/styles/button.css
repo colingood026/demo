@@ -1,0 +1,91 @@
+/*
+ * Copyright (c) eBizprise, Inc All Rights Reserved.
+ */
+
+.css_btn{
+	font-size:90%;
+	font-weight:normal;
+	font-family:微軟正黑體,新細明體,Verdana, Geneva, sans-serif;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	text-decoration:none;
+	text-align:center;
+	line-height:18px;
+	height:18px;
+	vertical-align:middle;
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #032a52), color-stop(100%, #003974) );
+	background:-moz-linear-gradient( center top, #032a52 5%, #003974 100% );
+	background:-ms-linear-gradient( top, #032a52 5%, #003974 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#032a52', endColorstr='#003974');
+	
+	border:1px solid #0d2244;	
+	background-color:#f7f6ef;
+	color:#ffffff;
+	display:inline-block;
+	cursor:pointer;
+
+}.css_btn:hover{
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #0084ff), color-stop(100%, #0073de) );
+	background:-moz-linear-gradient( center top, #0073de 5%, #0073de 100% );
+	background:-ms-linear-gradient( top, #0084ff 5%, #0073de 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0084ff', endColorstr='#0073de');
+	
+	
+	border:1px solid #0084ff;
+	background-color:#0084ff;
+	color:#ffffff;
+	text-decoration:none;
+}.css_btn:active{
+	position:relative;
+
+}
+
+.css_btn {
+	padding:1px 12px;
+	}
+	
+	
+.css_imgBtn{
+	font-weight:normal;
+	font-size:90%;
+	font-family:微軟正黑體,新細明體,Verdana, Geneva, sans-serif;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	text-decoration:none;
+	height:auto;
+	text-align:center;
+	height:20px;
+	vertical-align:middle;
+	padding-left:3px;
+	padding-right:3px;
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #032a52), color-stop(100%, #003974) );
+	background:-moz-linear-gradient( center top, #032a52 5%, #003974 100% );
+	background:-ms-linear-gradient( top, #032a52 5%, #003974 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#032a52', endColorstr='#003974');
+	
+	border:1px solid #0d2244;	
+	background-color:#f7f6ef;
+	color:#ffffff;
+	display:inline-block;
+	cursor:pointer;
+
+}.css_imgBtn:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #0084ff), color-stop(100%, #0073de) );
+	background:-moz-linear-gradient( center top, #0073de 5%, #0073de 100% );
+	background:-ms-linear-gradient( top, #0084ff 5%, #0073de 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0084ff', endColorstr='#0073de');
+	
+	
+	border:1px solid #0084ff;
+	background-color:#0084ff;
+	color:#ffffff;
+}.css_imgBtn:active{
+	position:relative;
+
+}
+	
+	
