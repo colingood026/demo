@@ -20,18 +20,20 @@
 	<h1>Hello! ${bean.account}</h1><br/>
 	<!--  -->
 	<div>
-		<input type='text' placeholder='請輸入基準料號' id='eqNo'>
-		<input type='text' placeholder='請輸入色號' id='colorNo'>
+		<input type='text' placeholder='請輸入基準料號' id='MAT_01'>
+		<input type='text' placeholder='請輸入色號' id='COL_NO'>
 		<button id='buyNoButton' class='css_btn'>搜尋</button>	
 		<br/>
 		<!-- 資料篩選 -->
+<!-- 	    <input placeholder="請輸入篩選條件" type="text" -->
+<!-- 	           onpaste="onFilterChanged(this.value)" -->
+<!-- 	           oninput="onFilterChanged(this.value)" -->
+<!-- 	           onchange="onFilterChanged(this.value)" -->
+<!-- 	           onchange="onFilterChanged(this.value)" -->
+<!-- 	           onkeydown="onFilterChanged(this.value)" -->
+<!-- 	           onkeyup="onFilterChanged(this.value)" id='filter'/> -->
 	    <input placeholder="請輸入篩選條件" type="text"
-	           onpaste="onFilterChanged(this.value)"
-	           oninput="onFilterChanged(this.value)"
-	           onchange="onFilterChanged(this.value)"
-	           onchange="onFilterChanged(this.value)"
-	           onkeydown="onFilterChanged(this.value)"
-	           onkeyup="onFilterChanged(this.value)" id='filter'/>
+	           onchange="onFilterChanged(this.value)" id='filter'/>	           
 	    <!-- 登出 -->
 		<button onClick="signOut()" id='signOut' class='css_btn'>登出</button>
 		<!-- 輸出excel -->

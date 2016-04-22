@@ -3,16 +3,16 @@
 		rowData=null;
 		//預設欄位位置
 		var columnDefs=[
-            {headerName: "收料日期", field: "buy_date", filter: 'text'},	
-            {headerName: "採購單號", field: "buy_no", filter: 'text'},	
-            {headerName: "基準料號", field: "eq_no", filter: 'text'},
-            {headerName: "色號", field: "color", filter: 'text'},
-            {headerName: "幅寬", field: "width", filter: 'text'},
-            {headerName: "箱號", field: "box_no", filter: 'text'},
-            {headerName: "缸號", field: "cylinder_no", filter: 'text'},
-            {headerName: "儲位", field: "stored", filter: 'text'},
-            {headerName: "庫存量", field: "amount", filter: 'text'},
-            {headerName: "庫存單位", field: "unit", filter: 'text'},			
+            {headerName: "收料日期", field: "REC_DATE", filter: 'text'},	
+            {headerName: "採購單號", field: "PUR_NO", filter: 'text'},	
+            {headerName: "基準料號", field: "MAT_01", filter: 'text'},
+            {headerName: "色號", field: "COL_NO", filter: 'text'},
+            {headerName: "幅寬", field: "WID_TH", filter: 'text'},
+            {headerName: "箱號", field: "CNT_NO", filter: 'text'},
+            {headerName: "缸號", field: "LOT_ID", filter: 'text'},
+            {headerName: "儲位", field: "LOC_CODE", filter: 'text'},
+            {headerName: "庫存量", field: "STOCK_QTY", filter: 'text'},
+            {headerName: "庫存單位", field: "UNT_RQ", filter: 'text'},			
 		];
 		//grid設定
 		var gridOptions={
@@ -34,38 +34,38 @@
 		    gridOptions.api.setQuickFilter(value);		  
 		}
 		//搜尋基準料號，色號
-		eqNo=null;
-		colorNo=null;
+		MAT_01=null;
+		COL_NO=null;
 		$('#buyNoButton').on('click',externalFilterChanged);		
 		function isExternalFilterPresent(){
 			//rowData為全域變數在第3行
 			gridOptions.api.setRowData(rowData);
 			//回傳true才會觸發下面的function doesExternalFilterPass
-			if(eqNo!=null||colorNo!=null){			
+			if(MAT_01!=null||COL_NO!=null){			
 				return true;
 			}
 		}		
 		function doesExternalFilterPass(node){
 			//顯示搜尋採購單號搜尋結果
-			if(eqNo!=null&&colorNo!=null){				
-				return node.data.eq_no==eqNo&&node.data.color==colorNo;
-			}else if(eqNo!=null){				
-				return node.data.eq_no==eqNo;	
-			}else if(colorNo!=null){				
-				return node.data.color==colorNo;
+			if(MAT_01!=null&&COL_NO!=null){				
+				return node.data.MAT_01==MAT_01&&node.data.COL_NO==COL_NO;
+			}else if(MAT_01!=null){				
+				return node.data.MAT_01==MAT_01;	
+			}else if(COL_NO!=null){				
+				return node.data.COL_NO==COL_NO;
 			}			
 		}
 		function externalFilterChanged(newvalue){
 			//接著觸發function isExternalFilterPresent
-			if($('#eqNo').val().length!=0){
-				eqNo=$('#eqNo').val();
+			if($('#MAT_01').val().length!=0){
+				MAT_01=$('#MAT_01').val();
 			}else{
-				eqNo=null;
+				MAT_01=null;
 			}
-			if($('#colorNo').val().length!=0){
-				colorNo=$('#colorNo').val();
+			if($('#COL_NO').val().length!=0){
+				COL_NO=$('#COL_NO').val();
 			}else{
-				colorNo=null;
+				COL_NO=null;
 			}
 			gridOptions.api.onFilterChanged();
 		}
@@ -92,26 +92,30 @@
 		//
 		function getColumnName(name){
 			switch(name){
-				case 'buy_date':return '收料日期';
-				case 'buy_no':return '採購單號';
-				case 'eq_no':return '基準料號';
-				case 'color':return '色號';
-				case 'width':return '幅寬';
-				case 'box_no':return '箱號';
-				case 'cylinder_no':return '缸號';
-				case 'stored':return '儲位';
-				case 'amount':return '庫存量';
-				case 'unit':return '庫存單位';	
+				case 'REC_DATE':return '收料日期';
+				case 'PUR_NO':return '採購單號';
+				case 'MAT_01':return '基準料號';
+				case 'COL_NO':return '色號';
+				case 'WID_TH':return '幅寬';
+				case 'CNT_NO':return '箱號';
+				case 'LOT_ID':return '缸號';
+				case 'LOC_CODE':return '儲位';
+				case 'STOCK_QTY':return '庫存量';
+				case 'UNT_RQ':return '庫存單位';	
 				default : return 'none';
 			}
 		}
 		//頁面載入時接收資料
-		document.addEventListener('DOMContentLoaded',function(){			
+		$(function(){
 			var gridDiv=document.querySelector('#myGrid');
-			new agGrid.Grid(gridDiv, gridOptions);	
+			//建立表格
+			new agGrid.Grid(gridDiv, gridOptions);
+			gridOptions.api.setColumnDefs(columnDefs);
+			gridOptions.api.sizeColumnsToFit();
 			//將資料塞入表格
 			$.post('equipmentAction.action',{},function(data){
-				rowData=data;//rowData為全域變數在第3行			
+				rowData=data;//rowData為全域變數在第3行				
+//				gridOptions.api.setRowData(rowData);				
 			});			
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
@@ -126,8 +130,10 @@
 					gridOptions.api.setColumnDefs(newcolumnDefs);
 					gridOptions.api.sizeColumnsToFit();
 				}				
-			})
+			})			
 		})
+		
+
 
 		//按下ctrl+f時聚焦到指定的地方
 		function keyDown(e){

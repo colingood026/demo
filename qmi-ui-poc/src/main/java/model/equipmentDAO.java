@@ -32,7 +32,7 @@ public class equipmentDAO {
 //		}
 //	}
 	
-	private final String SELECT_ALL="select * from equipment";
+	private final String SELECT_ALL="select * from INV_ITEM";
 	public List<equipmentVO> select_all(){
 		List<equipmentVO> result=null;
 		Connection conn=null;
@@ -48,16 +48,16 @@ public class equipmentDAO {
 			result=new ArrayList<equipmentVO>();
 			while(rs.next()){
 				equipmentVO bean=new equipmentVO();
-				bean.setAmount(rs.getDouble("amount"));
-				bean.setBox_no(rs.getString("box_no"));
-				bean.setBuy_date(rs.getDate("buy_date"));
-				bean.setBuy_no(rs.getString("buy_no"));
-				bean.setColor(rs.getString("color"));
-				bean.setCylinder_no(rs.getString("cylinder_no"));
-				bean.setEq_no(rs.getString("eq_no"));
-				bean.setStored(rs.getString("stored"));
-				bean.setUnit(rs.getString("unit"));
-				bean.setWidth(rs.getString("width"));
+				bean.setCNT_NO(rs.getString("CNT_NO"));
+				bean.setCOL_NO(rs.getString("COL_NO"));
+				bean.setLOC_CODE(rs.getString("LOC_CODE"));
+				bean.setLOT_ID(rs.getString("LOT_ID"));
+				bean.setMAT_01(rs.getString("MAT_01"));
+				bean.setPUR_NO(rs.getString("PUR_NO"));
+				bean.setREC_DATE(rs.getDate("REC_DATE"));
+				bean.setSTOCK_QTY(rs.getDouble("STOCK_QTY"));
+				bean.setUNT_RQ(rs.getString("UNT_RQ"));
+				bean.setWID_TH(rs.getDouble("WID_TH"));
 				result.add(bean);
 			}			
 		} catch (SQLException e) {			
