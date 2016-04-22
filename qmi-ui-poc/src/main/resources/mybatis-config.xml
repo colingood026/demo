@@ -8,7 +8,7 @@
     <properties resource="jdbc.properties"/>
     <!-- 設定對應名稱 -->
     <typeAliases>
-    	<typeAlias alias="Equipment" type="model.equipmentVO"/>
+    	<typeAlias alias="INV_ITEM" type="model.INV_ITEM_VO"/>
     	<typeAlias alias="Account" type="model.accountVO"/>
     </typeAliases>
     <environments default="development">
@@ -24,7 +24,7 @@
     </environments>
     
     <mappers>
-    	<mapper resource="myBatis/equipmentMapper.xml"/>
+    	<mapper resource="myBatis/INV_ITEM_Mapper.xml"/>
     	<mapper resource="myBatis/accountMapper.xml"/>
     </mappers>
 </configuration>

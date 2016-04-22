@@ -113,7 +113,7 @@
 			gridOptions.api.setColumnDefs(columnDefs);
 			gridOptions.api.sizeColumnsToFit();
 			//將資料塞入表格
-			$.post('equipmentAction.action',{},function(data){
+			$.post('INV_ITEM_Action.action',{},function(data){
 				rowData=data;//rowData為全域變數在第3行				
 //				gridOptions.api.setRowData(rowData);				
 			});			

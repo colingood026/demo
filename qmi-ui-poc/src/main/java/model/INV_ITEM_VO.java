@@ -1,6 +1,6 @@
 package model;
 
-public class equipmentVO {
+public class INV_ITEM_VO {
 	private java.util.Date REC_DATE; //收料日期
 	private String PUR_NO;	//採購單號
 	private String MAT_01;	//基準料號

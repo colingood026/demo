@@ -10,17 +10,17 @@ import org.json.JSONArray;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-import myBatis.equipmentService;
+import myBatis.INV_ITEM_Service;
 
-public class equipmentAction extends ActionSupport implements ServletResponseAware {
+public class INV_ITEM_Action extends ActionSupport implements ServletResponseAware {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	//jdbc
-//	private equipmentDAO dao=new equipmentDAO();
+	private INV_ITEM_DAO dao=new INV_ITEM_DAO();
 	//mybatis
-	private equipmentService service=new equipmentService();
+//	private INV_ITEM_Service service=new INV_ITEM_Service();
 	
 	private HttpServletResponse response;
 	public void setServletResponse(HttpServletResponse response) {
@@ -30,9 +30,9 @@ public class equipmentAction extends ActionSupport implements ServletResponseAwa
 	@Override
 	public String execute() throws Exception {
 		//jdbc
-//		List<equipmentVO> allEquip=dao.select_all();
+		List<INV_ITEM_VO> allEquip=dao.select_all();
 		//mybatis
-		List<equipmentVO> allEquip=service.findAllEquipment();
+//		List<INV_ITEM_VO> allEquip=service.findAllINV_ITEM();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		

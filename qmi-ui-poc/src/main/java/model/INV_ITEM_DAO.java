@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 import org.json.JSONArray;
 
-public class equipmentDAO {
+public class INV_ITEM_DAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
@@ -33,8 +33,8 @@ public class equipmentDAO {
 //	}
 	
 	private final String SELECT_ALL="select * from INV_ITEM";
-	public List<equipmentVO> select_all(){
-		List<equipmentVO> result=null;
+	public List<INV_ITEM_VO> select_all(){
+		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -45,9 +45,9 @@ public class equipmentDAO {
 			stmt=conn.prepareStatement(SELECT_ALL);
 			
 			rs=stmt.executeQuery();
-			result=new ArrayList<equipmentVO>();
+			result=new ArrayList<INV_ITEM_VO>();
 			while(rs.next()){
-				equipmentVO bean=new equipmentVO();
+				INV_ITEM_VO bean=new INV_ITEM_VO();
 				bean.setCNT_NO(rs.getString("CNT_NO"));
 				bean.setCOL_NO(rs.getString("COL_NO"));
 				bean.setLOC_CODE(rs.getString("LOC_CODE"));
@@ -76,8 +76,8 @@ public class equipmentDAO {
 	
 	//-------------------test------------------------
 	public static void main(String args[]){
-		equipmentDAO dao=new equipmentDAO();
-		List<equipmentVO> allEquip=dao.select_all();
+		INV_ITEM_DAO dao=new INV_ITEM_DAO();
+		List<INV_ITEM_VO> allEquip=dao.select_all();
 //		JSONArray json=new JSONArray(allEquip);
 		System.out.println("allEquip="+allEquip);
 		

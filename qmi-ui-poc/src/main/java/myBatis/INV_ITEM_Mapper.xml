@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="myBatis.equipmentMapper">
- <resultMap type="Equipment" id="equipmentResult">
+<mapper namespace="myBatis.INV_ITEM_Mapper">
+ <resultMap type="INV_ITEM" id="INV_ITEM_Result">
   <result property="REC_DATE" column="REC_DATE"/>
   <result property="PUR_NO" column="PUR_NO"/>
   <result property="MAT_01" column="MAT_01"/>
@@ -14,7 +14,7 @@
   <result property="UNT_RQ" column="UNT_RQ"/>
  </resultMap>
  
- <select id="findAllEquipment" resultMap="equipmentResult">
+ <select id="findAllINV_ITEM" resultMap="INV_ITEM_Result">
   select * from INV_ITEM
  </select>
  

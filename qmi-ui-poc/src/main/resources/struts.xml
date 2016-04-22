@@ -21,7 +21,7 @@
         </action>
         
         <!--  -->
-        <action name="equipmentAction" class="model.equipmentAction">
+        <action name="INV_ITEM_Action" class="model.INV_ITEM_Action">
 		</action>
 		
 		<action name="LoginAction" class="model.LoginAction">
