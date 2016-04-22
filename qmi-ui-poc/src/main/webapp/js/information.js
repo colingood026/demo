@@ -1,6 +1,4 @@
-		gridDiv=null;
-		//為了搜尋採購單號之後，清空該搜尋欄之後可以再叫出所有資料
-		rowData=null;
+
 		//預設欄位位置
 		var columnDefs=[
             {headerName: "收料日期", field: "REC_DATE"},	
@@ -41,10 +39,17 @@
 		$('#buyNoButton').on('click',getData);		
 		function getData(){
 			var MAT_01=$('#MAT_01').val();
-			var COL_NO=$('#COL_NO').val();			
-			$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
-				gridOptions.api.setRowData(data);
-			});	
+			var COL_NO=$('#COL_NO').val();
+			if(MAT_01.length==0&&COL_NO.length==0){
+				$.post('INV_ITEM_Action.action',{},function(data){
+					gridOptions.api.setRowData(data);
+				});
+			}else{
+				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
+					gridOptions.api.setRowData(data);
+				});	
+			}
+
 			
 		}
 		
@@ -80,7 +85,7 @@
 		}
 		//頁面載入時接收資料
 		$(function(){
-			gridDiv=document.querySelector('#myGrid');
+			var gridDiv=document.querySelector('#myGrid');
 			//建立表格
 			new agGrid.Grid(gridDiv, gridOptions);
 			gridOptions.api.setColumnDefs(columnDefs);
