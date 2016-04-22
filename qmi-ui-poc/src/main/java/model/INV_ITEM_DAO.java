@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 
 import org.json.JSONArray;
 
+import com.google.common.base.Stopwatch;
+
 public class INV_ITEM_DAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	//
@@ -45,7 +47,9 @@ public class INV_ITEM_DAO {
 			stmt=conn.prepareStatement(SELECT_ALL);
 			
 			rs=stmt.executeQuery();
+			
 			result=new ArrayList<INV_ITEM_VO>();
+			
 			while(rs.next()){
 				INV_ITEM_VO bean=new INV_ITEM_VO();
 				bean.setCNT_NO(rs.getString("CNT_NO"));
@@ -59,7 +63,8 @@ public class INV_ITEM_DAO {
 				bean.setUNT_RQ(rs.getString("UNT_RQ"));
 				bean.setWID_TH(rs.getDouble("WID_TH"));
 				result.add(bean);
-			}			
+			}
+			
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {			
@@ -77,7 +82,9 @@ public class INV_ITEM_DAO {
 	//-------------------test------------------------
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
+		
 		List<INV_ITEM_VO> allEquip=dao.select_all();
+		
 //		JSONArray json=new JSONArray(allEquip);
 		System.out.println("allEquip="+allEquip);
 		

@@ -46,7 +46,7 @@
 	<!-- 資料呈現 -->
 	<div id="myGrid" style="height: 100%;" class="ag-fresh"></div>
 	
-<script src="js/ag-grid.js"></script>
+<script src="js/ag-grid-enterprise.js"></script>
 
 <script src="js/jquery-2.2.3.js"></script>
 <script src="js/information.js"></script>

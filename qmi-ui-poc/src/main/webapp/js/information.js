@@ -27,7 +27,10 @@
 			//點選一整行
 			rowSelection: 'multiple',
 			//關閉loading畫面
-			suppressLoadingOverlay:true
+			suppressLoadingOverlay:true,
+			//大範圍選取
+			enableRangeSelection: true,
+
 		};		
 		//使用者輸入篩選條件
 		function onFilterChanged(value) {
@@ -39,7 +42,7 @@
 		$('#buyNoButton').on('click',externalFilterChanged);		
 		function isExternalFilterPresent(){
 			//rowData為全域變數在第3行
-			gridOptions.api.setRowData(rowData);
+//			gridOptions.api.setRowData(rowData);
 			//回傳true才會觸發下面的function doesExternalFilterPass
 			if(MAT_01!=null||COL_NO!=null){			
 				return true;
@@ -107,6 +110,7 @@
 		}
 		//頁面載入時接收資料
 		$(function(){
+			console.log('haha');
 			var gridDiv=document.querySelector('#myGrid');
 			//建立表格
 			new agGrid.Grid(gridDiv, gridOptions);
@@ -114,8 +118,10 @@
 			gridOptions.api.sizeColumnsToFit();
 			//將資料塞入表格
 			$.post('INV_ITEM_Action.action',{},function(data){
-				rowData=data;//rowData為全域變數在第3行				
-//				gridOptions.api.setRowData(rowData);				
+				
+				rowData=data;//rowData為全域變數在第3行	
+				console.log('rowData='+rowData);
+				gridOptions.api.setRowData(rowData);				
 			});			
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
