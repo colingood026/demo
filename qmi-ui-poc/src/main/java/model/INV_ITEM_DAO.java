@@ -152,7 +152,7 @@ public class INV_ITEM_DAO {
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_by_mat01("S-2727");
+		List<INV_ITEM_VO> allEquip=dao.select_all();
 		
 //		JSONArray json=new JSONArray(allEquip);
 		System.out.println("allEquip="+allEquip);

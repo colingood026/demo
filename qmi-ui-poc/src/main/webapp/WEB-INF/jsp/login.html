@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/styles/default.css"/>
+<link rel="stylesheet" type="text/css" href="css/styles/font-awesome/css/font-awesome.css"/>
+<title>崑洲實業(QMI)</title>
+<style type="text/css">
+<!--
+    .style1 {
+        color: #FFFFFF
+    }
+-->
+</style>
+</head>
+<body>
+<form action="LoginAction.action" method="post">
+    <div class="loginOuter">
+    	<div class="loginInputContainer">
+        	<table width="96%" align="center" id ="table1" style="width:auto; margin-top:50px;">
+              <tr>
+                <td class="Txt_white">
+                    <i class="fa fa-user"></i>
+                    	使用者帳號
+                </td>
+                <td><input type="text" name="accout" placeholder='帳號' class="required uppercase"/></td>
+              </tr>
+              <tr>
+                <td class="Txt_white">
+                    <i class="fa fa-lock"></i>
+                    	密碼
+                </td>
+                <td><input type="password" name="password" placeholder='密碼' class="required" /></td>
+              </tr>
+              <tr>
+                <td class="Txt_white">
+                    	預設語系/Language
+                </td>
+                <td>
+                  <select id="language" name="language">                    
+                        <option value="zh_TW">中文 </option>                    
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="textAlignRight">                
+                <a id="loginBtn" class="css_btn" style="margin-top:5px;">登入</a>
+                <a id="cleanBtn" class="css_btn" style="margin-top:5px;">清除</a>
+                <a id="forgetBtn" class="css_btn" style="margin-top:5px;" onclick="changeTable(2)">忘記密碼</a></td>
+              </tr>
+              <tr>
+                <td colspan="2" class="Txt_white">如有任何問題，請洽系統管理員：系統管理員<br />
+                <span>電話：02-27017138 # </span></td>
+              </tr>
+          </table>
+        
+        </div>
+    </div>
+</form>
+<script src="js/jquery-2.2.3.js"></script>
+<script>
+	$(function(){
+		$('#loginBtn').click(function(){
+			$('form')[0].submit();
+		});
+	})
+
+</script>
+</body>
+</html>

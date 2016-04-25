@@ -12,7 +12,7 @@
         <default-action-ref name="index" />
 
         <action name="index" class="war.IndexAction">
-            <result>/WEB-INF/jsp/index.jsp</result>
+            <result>/WEB-INF/jsp/login.html</result>
         </action>
 
         <action name="helloWorld" class="helloWorldAction">
