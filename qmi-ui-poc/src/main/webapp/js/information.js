@@ -1,7 +1,7 @@
 
 		//預設欄位位置
 		var columnDefs=[
-		     {headerName: "#",field:'index', width: 50, cellRenderer: function(params) {
+		     {headerName: "#",field:'index', width: 100, cellRenderer: function(params) {
 		    	 return params.node.id + 1;
 		     } },
             {headerName: "收料日期", field: "rec_DATE"},	
