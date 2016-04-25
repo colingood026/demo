@@ -98,7 +98,7 @@
 				if(data!='none'){
 					var newcolumnDefs=[];//新的欄位位置
 					$.each(data.split(','),function(index,value){
-						newcolumnDefs.push({headerName: getColumnName(value), field: value, filter: 'text'});						
+						newcolumnDefs.push({headerName: getColumnName(value), field: value});						
 					})					
 					gridOptions.api.setColumnDefs(newcolumnDefs);
 					gridOptions.api.sizeColumnsToFit();
