@@ -1,16 +1,17 @@
 
 		//預設欄位位置
 		var columnDefs=[
-            {headerName: "收料日期", field: "REC_DATE"},	
-            {headerName: "採購單號", field: "PUR_NO"},	
-            {headerName: "基準料號", field: "MAT_01"},
-            {headerName: "色號", field: "COL_NO"},
-            {headerName: "幅寬", field: "WID_TH"},
-            {headerName: "箱號", field: "CNT_NO"},
-            {headerName: "缸號", field: "LOT_ID"},
-            {headerName: "儲位", field: "LOC_CODE"},
-            {headerName: "庫存量", field: "STOCK_QTY"},
-            {headerName: "庫存單位", field: "UNT_RQ"},			
+		    {headerName: "序號", field: "index"},
+            {headerName: "收料日期", field: "rec_DATE"},	
+            {headerName: "採購單號", field: "pur_NO"},	
+            {headerName: "基準料號", field: "mat_01"},
+            {headerName: "色號", field: "col_NO"},
+            {headerName: "幅寬", field: "wid_TH"},
+            {headerName: "箱號", field: "cnt_NO"},
+            {headerName: "缸號", field: "lot_ID"},
+            {headerName: "儲位", field: "loc_CODE"},
+            {headerName: "庫存量", field: "stock_QTY"},
+            {headerName: "庫存單位", field: "unt_RQ"},			
 		];
 		
 		//grid設定
@@ -40,16 +41,19 @@
 		function getData(){
 			var MAT_01=$('#MAT_01').val();
 			var COL_NO=$('#COL_NO').val();
+//			var dataNumbers=0;//資料的筆數
 			if(MAT_01.length==0&&COL_NO.length==0){
 				$.post('INV_ITEM_Action.action',{},function(data){
+//					dataNumbers=data.length;					
 					gridOptions.api.setRowData(data);
 				});
 			}else{
 				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
+//					dataNumbers=data.length;					
 					gridOptions.api.setRowData(data);
 				});	
 			}
-
+			
 			
 		}
 		
@@ -70,16 +74,16 @@
 		//
 		function getColumnName(name){
 			switch(name){
-				case 'REC_DATE':return '收料日期';
-				case 'PUR_NO':return '採購單號';
-				case 'MAT_01':return '基準料號';
-				case 'COL_NO':return '色號';
-				case 'WID_TH':return '幅寬';
-				case 'CNT_NO':return '箱號';
-				case 'LOT_ID':return '缸號';
-				case 'LOC_CODE':return '儲位';
-				case 'STOCK_QTY':return '庫存量';
-				case 'UNT_RQ':return '庫存單位';	
+				case 'rec_DATE':return '收料日期';
+				case 'pur_NO':return '採購單號';
+				case 'mat_01':return '基準料號';
+				case 'col_NO':return '色號';
+				case 'wid_TH':return '幅寬';
+				case 'cnt_NO':return '箱號';
+				case 'lot_ID':return '缸號';
+				case 'loc_CODE':return '儲位';
+				case 'stock_QTY':return '庫存量';
+				case 'unt_RQ':return '庫存單位';	
 				default : return 'none';
 			}
 		}

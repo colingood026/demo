@@ -1,5 +1,7 @@
 package model;
 
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,12 +15,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 
 import com.google.common.base.Stopwatch;
 
 public class INV_ITEM_DAO {
 	private jdbcClose jdbcClose=new jdbcClose();
+	private static final ObjectMapper mapper = new ObjectMapper();
+	private static ConvertToJson ConvertToJson=new ConvertToJson();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
@@ -34,7 +39,7 @@ public class INV_ITEM_DAO {
 //		}
 //	}
 	//SELECT_ALL
-	private final String SELECT_ALL="select * from INV_ITEM";
+	private final String SELECT_ALL="select * from INV_ITEM ";
 	public List<INV_ITEM_VO> select_all(){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
@@ -44,9 +49,9 @@ public class INV_ITEM_DAO {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn=DriverManager.getConnection(URL, USER, PASSWORD);
 //			conn=ds.getConnection();
-			stmt=conn.prepareStatement(SELECT_ALL);			
-			rs=stmt.executeQuery();			
-			result=getResult(result,rs);			
+			stmt=conn.prepareStatement(SELECT_ALL);
+			rs=stmt.executeQuery();
+			result=getResult(result,rs);
 		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
 		} catch (SQLException e) {			
@@ -69,7 +74,8 @@ public class INV_ITEM_DAO {
 //			conn=ds.getConnection();
 			stmt=conn.prepareStatement(SELECT_BY_COL_NO);
 			stmt.setString(1, colNo);
-			rs=stmt.executeQuery();			
+			rs=stmt.executeQuery();
+			
 			result=getResult(result,rs);			
 		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
@@ -152,10 +158,12 @@ public class INV_ITEM_DAO {
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_all();
+		List<INV_ITEM_VO> allEquip=dao.select_by_colNo("001-BT");
+	
+
+		System.out.println("allEquipJson="+allEquip.size());
 		
-//		JSONArray json=new JSONArray(allEquip);
-		System.out.println("allEquip="+allEquip);
+		
 		
 		
 		

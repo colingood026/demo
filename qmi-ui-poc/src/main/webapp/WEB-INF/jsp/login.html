@@ -23,14 +23,14 @@
                     <i class="fa fa-user"></i>
                     	使用者帳號
                 </td>
-                <td><input type="text" name="accout" placeholder='帳號' class="required uppercase"/></td>
+                <td><input type="text" name="accout" id="accout" placeholder='帳號' class="required uppercase"/></td>
               </tr>
               <tr>
                 <td class="Txt_white">
                     <i class="fa fa-lock"></i>
                     	密碼
                 </td>
-                <td><input type="password" name="password" placeholder='密碼' class="required" /></td>
+                <td><input type="password" name="password" id="password" placeholder='密碼' class="required" /></td>
               </tr>
               <tr>
                 <td class="Txt_white">
@@ -61,7 +61,24 @@
 <script>
 	$(function(){
 		$('#loginBtn').click(function(){
-			$('form')[0].submit();
+			var acc=$('#accout').val();
+			var pwd=$('#password').val();
+			var isAccInput=false;
+			var isPwdInput=false;
+			if(acc.length!=0){
+				isAccInput=true;
+			}else{
+				alert('請輸入帳號');
+			}
+			if(pwd.length!=0){
+				isPwdInput=true;
+			}else{
+				alert('請輸入密碼');
+			}
+			if(isAccInput&&isPwdInput){
+	 			$('form')[0].submit();
+			}
+
 		});
 	})
 

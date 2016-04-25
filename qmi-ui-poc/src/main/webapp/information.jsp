@@ -22,7 +22,7 @@
 	<div>
 		<input type='text' placeholder='請輸入基準料號' id='MAT_01'>
 		<input type='text' placeholder='請輸入色號' id='COL_NO'>
-		<button id='buyNoButton' class='css_btn'>搜尋</button>	
+		<a id='buyNoButton' class='css_btn'>搜尋</a>	
 		<br/>
 		<!-- 資料篩選 -->
 <!-- 	    <input placeholder="請輸入篩選條件" type="text" -->
@@ -35,10 +35,10 @@
 	    <input placeholder="請輸入篩選條件" type="text"
 	           onchange="onFilterChanged(this.value)" id='filter'/>	           
 	    <!-- 登出 -->
-		<button onClick="signOut()" id='signOut' class='css_btn'>登出</button>
+		<a onClick="signOut()" id='signOut' class='css_btn'>登出</a>
 		<!-- 輸出excel -->
 	    <label>
-	        <button onclick="onBtExport()" id='excel' class='css_btn'>匯出到Excel</button>
+	        <a onclick="onBtExport()" id='excel' class='css_btn'>匯出到Excel</a>
 	    </label>
   	</div>
   	<!--  -->

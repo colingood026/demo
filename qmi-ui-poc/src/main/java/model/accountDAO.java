@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,8 +13,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class accountDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
+	private static final ObjectMapper mapper = new ObjectMapper();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
@@ -97,6 +104,22 @@ public class accountDAO {
 	//--------------------------
 	public static void main(String args[]){
 		accountDAO dao=new accountDAO();
-	
+		accountVO user=dao.select_by_id("Alex");
+		try {
+			//
+			mapper.writeValue(new File("C:\\json\\user.json"), user);
+			//
+			String jsonString=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+			System.out.println("jsonString="+jsonString);			
+		} catch (JsonGenerationException e) {
+			// TODO:[colin.lee], Auto-generated try catch stub
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO:[colin.lee], Auto-generated try catch stub
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO:[colin.lee], Auto-generated try catch stub
+			e.printStackTrace();
+		}
 	}
 }

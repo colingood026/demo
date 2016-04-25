@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.json.JSONArray;
 
+import com.google.common.base.Stopwatch;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -31,6 +32,8 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 	public void setCOL_NO(String cOL_NO) {
 		COL_NO = cOL_NO;
 	}
+	//json
+	private ConvertToJson ConvertToJson=new ConvertToJson();
 	//jdbc
 	private INV_ITEM_DAO dao=new INV_ITEM_DAO();
 
@@ -44,18 +47,19 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 	public String execute() throws Exception {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		JSONArray json=null;
-		if(MAT_01==null&&COL_NO==null){
-			json=new JSONArray(dao.select_all());
+		List<INV_ITEM_VO> item=null;
+		if(MAT_01==null&&COL_NO==null){			
+			item=dao.select_all();				
 		}else if(MAT_01.length()!=0&&COL_NO.length()!=0){
-			json=new JSONArray(dao.select_by_colNoAndmat01(COL_NO, MAT_01));
+			item=dao.select_by_colNoAndmat01(COL_NO, MAT_01);
 		}else if(MAT_01.length()!=0){
-			json=new JSONArray(dao.select_by_mat01(MAT_01));
+			item=dao.select_by_mat01(MAT_01);
 		}else if(COL_NO.length()!=0){
-			json=new JSONArray(dao.select_by_colNo(COL_NO));
+			item=dao.select_by_colNo(COL_NO);
 		}					
-		if(json!=null){			
-			response.getWriter().print(json);
+		if(item!=null){			
+			String jsonString=ConvertToJson.toJson(item);			
+			response.getWriter().print(jsonString);
 		}
 		return Action.NONE;
 	}
