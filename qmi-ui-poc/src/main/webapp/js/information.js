@@ -1,7 +1,9 @@
 
 		//預設欄位位置
 		var columnDefs=[
-		    {headerName: "序號", field: "index"},
+		     {headerName: "#",field:'index', width: 50, cellRenderer: function(params) {
+		    	 return params.node.id + 1;
+		     } },
             {headerName: "收料日期", field: "rec_DATE"},	
             {headerName: "採購單號", field: "pur_NO"},	
             {headerName: "基準料號", field: "mat_01"},
@@ -41,20 +43,15 @@
 		function getData(){
 			var MAT_01=$('#MAT_01').val();
 			var COL_NO=$('#COL_NO').val();
-//			var dataNumbers=0;//資料的筆數
 			if(MAT_01.length==0&&COL_NO.length==0){
-				$.post('INV_ITEM_Action.action',{},function(data){
-//					dataNumbers=data.length;					
+				$.post('INV_ITEM_Action.action',{},function(data){					
 					gridOptions.api.setRowData(data);
 				});
 			}else{
-				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
-//					dataNumbers=data.length;					
+				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){			
 					gridOptions.api.setRowData(data);
 				});	
 			}
-			
-			
 		}
 		
 		
@@ -64,6 +61,7 @@
 			var change=gridOptions.columnApi.getColumnState();//取得目前的欄位名稱
 			var newColumn=[];//要存入DB的欄位
 			$.each(change,function(key,value){
+				console.log('value.colId='+value.colId);
 				newColumn.push(value.colId);				
 			})			
 			var jsonString=JSON.stringify(newColumn);
@@ -83,7 +81,8 @@
 				case 'lot_ID':return '缸號';
 				case 'loc_CODE':return '儲位';
 				case 'stock_QTY':return '庫存量';
-				case 'unt_RQ':return '庫存單位';	
+				case 'unt_RQ':return '庫存單位';
+				case 'index':return '#';
 				default : return 'none';
 			}
 		}
@@ -102,7 +101,13 @@
 				if(data!='none'){
 					var newcolumnDefs=[];//新的欄位位置
 					$.each(data.split(','),function(index,value){
-						newcolumnDefs.push({headerName: getColumnName(value), field: value});						
+						if(value=='index'){
+							newcolumnDefs.push({headerName: getColumnName(value), field: value, width: 100, cellRenderer: function(params) {
+						    	 return params.node.id + 1;
+						     } });
+						}else{
+							newcolumnDefs.push({headerName: getColumnName(value), field: value});
+						}												
 					})					
 					gridOptions.api.setColumnDefs(newcolumnDefs);
 					gridOptions.api.sizeColumnsToFit();
