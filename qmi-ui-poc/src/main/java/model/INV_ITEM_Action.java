@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +38,8 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 	private ConvertToJson ConvertToJson=new ConvertToJson();
 	//jdbc
 	private INV_ITEM_DAO dao=new INV_ITEM_DAO();
+	//mybatis
+//	private INV_ITEM_Service iNV_ITEM_Service=new INV_ITEM_Service();
 
 	
 	private HttpServletResponse response;
@@ -48,6 +52,7 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		List<INV_ITEM_VO> item=null;
+		//jdbc
 		if(MAT_01==null&&COL_NO==null){			
 			item=dao.select_all();				
 		}else if(MAT_01.length()!=0&&COL_NO.length()!=0){
@@ -56,7 +61,25 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 			item=dao.select_by_1condition("MAT_01",MAT_01);
 		}else if(COL_NO.length()!=0){
 			item=dao.select_by_1condition("COL_NO",COL_NO);
-		}					
+		}
+		//mybatis
+//		Map<String,Object> map=new HashMap<String,Object>();
+//		if(MAT_01==null&&COL_NO==null){			
+//			item=iNV_ITEM_Service.select_INV_ITEM(map);				
+//		}else if(MAT_01.length()!=0&&COL_NO.length()!=0){
+//			map.put("COL_NO", COL_NO);
+//			map.put("MAT_01", MAT_01);
+//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//		}else if(MAT_01.length()!=0){
+//			map.put("MAT_01", MAT_01);
+//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//		}else if(COL_NO.length()!=0){
+//			map.put("COL_NO", COL_NO);
+//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//		}
+		
+		
+		
 		if(item!=null){			
 			String jsonString=ConvertToJson.toJson(item);			
 			response.getWriter().print(jsonString);
