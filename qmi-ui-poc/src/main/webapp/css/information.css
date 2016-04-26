@@ -1,6 +1,10 @@
     .ag-header-cell-filtered {
         background-color: #e5e5e5;
     }
+    #filter{
+       	margin-right:5px;
+  		float:right;
+    }
     #excel{
     	margin-right:5px;
   		float:right;		
@@ -10,7 +14,7 @@
   		float:right;		  
 	}
 	#blankDiv{
-		height:10px;
+		height:25px;
 	}
 /* 	使用者按下ctrl+f之後加亮篩選框 */
 	.filterShow{
