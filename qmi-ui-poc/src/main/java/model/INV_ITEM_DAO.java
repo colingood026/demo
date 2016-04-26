@@ -148,10 +148,10 @@ public class INV_ITEM_DAO {
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_by_2condition("MAT_01","S-2727","COL_NO","001-BT");
+		List<INV_ITEM_VO> allEquip=dao.select_by_1condition("MAT_01","S-2727");
 	
 
-		System.out.println("allEquipJson="+allEquip.size());
+		System.out.println("allEquipJson="+allEquip);
 		
 		
 		

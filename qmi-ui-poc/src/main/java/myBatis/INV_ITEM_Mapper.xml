@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="myBatis.INV_ITEM_Mapper">
- <resultMap type="INV_ITEM" id="INV_ITEM_Result">
-  <result property="REC_DATE" column="REC_DATE"/>
-  <result property="PUR_NO" column="PUR_NO"/>
-  <result property="MAT_01" column="MAT_01"/>
-  <result property="COL_NO" column="COL_NO"/>
-  <result property="WID_TH" column="WID_TH"/>
-  <result property="CNT_NO" column="CNT_NO"/>
-  <result property="LOT_ID" column="LOT_ID"/>
-  <result property="LOC_CODE" column="LOC_CODE"/>
-  <result property="STOCK_QTY" column="STOCK_QTY"/>
-  <result property="UNT_RQ" column="UNT_RQ"/>
- </resultMap>
+<mapper namespace="myBatis.INV_ITEM_MDAO">
+		<!-- 外部的resultMap，也可以使用 resultType去參考mybatis-config的alias-->
+<!--  <resultMap type="INV_ITEM" id="INV_ITEM_Result"> -->
+<!--   <result property="REC_DATE" column="REC_DATE"/> -->
+<!--   <result property="PUR_NO" column="PUR_NO"/> -->
+<!--   <result property="MAT_01" column="MAT_01"/> -->
+<!--   <result property="COL_NO" column="COL_NO"/> -->
+<!--   <result property="WID_TH" column="WID_TH"/> -->
+<!--   <result property="CNT_NO" column="CNT_NO"/> -->
+<!--   <result property="LOT_ID" column="LOT_ID"/> -->
+<!--   <result property="LOC_CODE" column="LOC_CODE"/> -->
+<!--   <result property="STOCK_QTY" column="STOCK_QTY"/> -->
+<!--   <result property="UNT_RQ" column="UNT_RQ"/> -->
+<!--  </resultMap> -->
  
- <select id="findAllINV_ITEM" resultMap="INV_ITEM_Result">
-  select * from INV_ITEM
+<!--  <select id="findAllINV_ITEM" resultType="INV_ITEM"> -->
+<!--   select * from INV_ITEM -->
+<!--  </select> -->
+ 
+ <select id="select_INV_ITEM" parameterType="Map" resultType="INV_ITEM">
+ 	select * from INV_ITEM 
+ 		<where>	 		  	 
+		 	<if test="COL_NO != null">
+		 		COL_NO=#{COL_NO}
+		 	</if>
+		 	<if test="COL_NO != null and MAT_01 != null">
+		 		and
+		 	</if>
+		 	<if test="MAT_01 != null">
+		 		MAT_01=#{MAT_01}
+		 	</if>	 		
+ 		</where>
  </select>
  
 
