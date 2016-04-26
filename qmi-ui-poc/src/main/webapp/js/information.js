@@ -32,6 +32,8 @@
 			enableRangeSelection: true,
 			 //當群組時會顯示目前是用哪個欄位做群組
 			rowGroupPanelShow:'onlyWhenGrouping',
+			//
+			enableColResize:true,
 		};		
 		//使用者輸入篩選條件
 		function onFilterChanged(value) {

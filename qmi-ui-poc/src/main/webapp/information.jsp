@@ -38,7 +38,7 @@
   	<div id='blankDiv'></div>	
 	<!-- 資料呈現 -->
 	<div id="myGrid" style="height: 100%;" class="ag-blue"></div>
-	
+
 <script src="js/ag-grid-enterprise.js"></script>
 
 <script src="js/jquery-2.2.3.js"></script>
