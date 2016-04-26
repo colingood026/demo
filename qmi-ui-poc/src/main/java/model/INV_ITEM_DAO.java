@@ -61,44 +61,21 @@ public class INV_ITEM_DAO {
 		}		
 		return result;
 	}
-	//--------------用色號搜巡SELECT_BY_COL_NO
-	private static final String SELECT_BY_COL_NO="select * from INV_ITEM where COL_NO=?";
-	public List<INV_ITEM_VO> select_by_colNo(String colNo){
+	//--------------單一條件查詢
+	private static final String SELECT_BY_ONE_CONDITION="select * from INV_ITEM where ";
+	public List<INV_ITEM_VO> select_by_1condition(String column,String value){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
+		StringBuilder sb=new StringBuilder(SELECT_BY_ONE_CONDITION);
+		getCol(sb,column);		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn=DriverManager.getConnection(URL, USER, PASSWORD);
 //			conn=ds.getConnection();
-			stmt=conn.prepareStatement(SELECT_BY_COL_NO);
-			stmt.setString(1, colNo);
-			rs=stmt.executeQuery();
-			
-			result=getResult(result,rs);			
-		} catch (ClassNotFoundException e) {			
-			e.printStackTrace();
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		} finally{						
-			jdbcClose.allClose(conn, stmt, rs);			
-		}		
-		return result;
-	}	
-	//--------------------------用料號搜尋SELECT_BY_MAT_01
-	private static final String SELECT_BY_MAT_01="select * from INV_ITEM where MAT_01=?";
-	public List<INV_ITEM_VO> select_by_mat01(String mat01){
-		List<INV_ITEM_VO> result=null;
-		Connection conn=null;
-		PreparedStatement stmt=null;
-		ResultSet rs=null;
-		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
-			stmt=conn.prepareStatement(SELECT_BY_MAT_01);
-			stmt.setString(1, mat01);
+			stmt=conn.prepareStatement(sb.toString());
+			stmt.setString(1, value);
 			rs=stmt.executeQuery();			
 			result=getResult(result,rs);			
 		} catch (ClassNotFoundException e) {			
@@ -110,20 +87,24 @@ public class INV_ITEM_DAO {
 		}		
 		return result;
 	}		
-	//--------------------------料號+色號搜尋SELECT_BY_COL_NO_AND_MAT_01
-	private static final String SELECT_BY_COL_NO_AND_MAT_01="select * from INV_ITEM where COL_NO=? and MAT_01=?";
-	public List<INV_ITEM_VO> select_by_colNoAndmat01(String colNo,String mat01){
+	//--------------------------兩個條件查詢
+	private static final String SELECT_BY_TWO_CONDITION="select * from INV_ITEM where ";
+	public List<INV_ITEM_VO> select_by_2condition(String column1,String value1,String column2,String value2){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
+		StringBuilder sb=new StringBuilder(SELECT_BY_TWO_CONDITION);
+		getCol(sb,column1);
+		sb.append(" and ");
+		getCol(sb,column2);
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn=DriverManager.getConnection(URL, USER, PASSWORD);
 //			conn=ds.getConnection();
-			stmt=conn.prepareStatement(SELECT_BY_COL_NO_AND_MAT_01);
-			stmt.setString(1, colNo);
-			stmt.setString(2, mat01);
+			stmt=conn.prepareStatement(sb.toString());
+			stmt.setString(1, value1);
+			stmt.setString(2, value2);
 			rs=stmt.executeQuery();			
 			result=getResult(result,rs);			
 		} catch (ClassNotFoundException e) {			
@@ -134,6 +115,15 @@ public class INV_ITEM_DAO {
 			jdbcClose.allClose(conn, stmt, rs);			
 		}		
 		return result;
+	}
+	//for 動態查詢
+	private StringBuilder getCol(StringBuilder sb,String column){
+		if(column=="COL_NO"){
+			sb.append("COL_NO=?");
+		}else if(column=="MAT_01"){
+			sb.append("MAT_01=?");
+		}
+		return sb;
 	}
 	//
 	private List<INV_ITEM_VO> getResult(List<INV_ITEM_VO> result,ResultSet rs) throws SQLException{
@@ -158,7 +148,7 @@ public class INV_ITEM_DAO {
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_by_colNo("001-BT");
+		List<INV_ITEM_VO> allEquip=dao.select_by_2condition("MAT_01","S-2727","COL_NO","001-BT");
 	
 
 		System.out.println("allEquipJson="+allEquip.size());

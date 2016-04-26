@@ -51,11 +51,11 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 		if(MAT_01==null&&COL_NO==null){			
 			item=dao.select_all();				
 		}else if(MAT_01.length()!=0&&COL_NO.length()!=0){
-			item=dao.select_by_colNoAndmat01(COL_NO, MAT_01);
+			item=dao.select_by_2condition("COL_NO",COL_NO,"MAT_01", MAT_01);
 		}else if(MAT_01.length()!=0){
-			item=dao.select_by_mat01(MAT_01);
+			item=dao.select_by_1condition("MAT_01",MAT_01);
 		}else if(COL_NO.length()!=0){
-			item=dao.select_by_colNo(COL_NO);
+			item=dao.select_by_1condition("COL_NO",COL_NO);
 		}					
 		if(item!=null){			
 			String jsonString=ConvertToJson.toJson(item);			
