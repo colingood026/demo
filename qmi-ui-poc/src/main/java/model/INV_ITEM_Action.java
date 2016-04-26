@@ -80,6 +80,8 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 		if(item!=null){			
 			String jsonString=ConvertToJson.toJson(item);			
 			response.getWriter().print(jsonString);
+			response.getWriter().flush();
+			response.getWriter().close();
 		}
 		return Action.NONE;
 	}

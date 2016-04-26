@@ -27,7 +27,7 @@ public class INV_ITEM_DAO {
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
-	private final String PASSWORD="123qweaS";
+	private final String PASSWORD="sa123456";
 	//DataSource
 //	private DataSource ds=null;
 //	public equipmentDAO(){
