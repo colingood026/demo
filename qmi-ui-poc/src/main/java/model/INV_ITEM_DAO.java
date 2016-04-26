@@ -39,7 +39,7 @@ public class INV_ITEM_DAO {
 //		}
 //	}
 	//SELECT_ALL
-	private final String SELECT_ALL="select * from INV_ITEM ";
+	private static final String SELECT_ALL="select * from INV_ITEM ";
 	public List<INV_ITEM_VO> select_all(){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
@@ -62,13 +62,13 @@ public class INV_ITEM_DAO {
 		return result;
 	}
 	//--------------單一條件查詢
-	private static final String SELECT_BY_ONE_CONDITION="select * from INV_ITEM where ";
+	private static final String SELECT_BY_CONDITION="select * from INV_ITEM where ";
 	public List<INV_ITEM_VO> select_by_1condition(String column,String value){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		StringBuilder sb=new StringBuilder(SELECT_BY_ONE_CONDITION);
+		StringBuilder sb=new StringBuilder(SELECT_BY_CONDITION);
 		getCol(sb,column);		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -88,13 +88,12 @@ public class INV_ITEM_DAO {
 		return result;
 	}		
 	//--------------------------兩個條件查詢
-	private static final String SELECT_BY_TWO_CONDITION="select * from INV_ITEM where ";
 	public List<INV_ITEM_VO> select_by_2condition(String column1,String value1,String column2,String value2){
 		List<INV_ITEM_VO> result=null;
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		StringBuilder sb=new StringBuilder(SELECT_BY_TWO_CONDITION);
+		StringBuilder sb=new StringBuilder(SELECT_BY_CONDITION);
 		getCol(sb,column1);
 		sb.append(" and ");
 		getCol(sb,column2);
@@ -148,10 +147,11 @@ public class INV_ITEM_DAO {
 	public static void main(String args[]){
 		INV_ITEM_DAO dao=new INV_ITEM_DAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_by_1condition("MAT_01","S-2727");
-	
+		List<INV_ITEM_VO> allEquip=dao.select_by_2condition("MAT_01","S-2727","COL_NO","001-BT");
+		INV_ITEM_VO bean=new INV_ITEM_VO();
+		
 
-		System.out.println("allEquipJson="+allEquip);
+		System.out.println(bean.getCNT_NO());
 		
 		
 		

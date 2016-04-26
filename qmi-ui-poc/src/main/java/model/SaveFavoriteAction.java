@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import myBatis.accountService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
@@ -19,7 +20,10 @@ public class SaveFavoriteAction extends ActionSupport implements SessionAware {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	//jdbc
 	private accountDAO accountDAO=new accountDAO();
+	//mybatis
+//	private accountService accountService=new accountService();
 	private String newColumn;
 	
 	
@@ -57,8 +61,11 @@ public class SaveFavoriteAction extends ActionSupport implements SessionAware {
 				preference.append((String)jSONArray.get(i)).append(",");
 			}						
 		}
-		//更新資料庫
-		System.out.println(accountDAO.update(preference.toString(), user.getAccount()));	
+		//更新資料庫jdbc
+		System.out.println(accountDAO.update(preference.toString(), user.getAccount()));
+		//mybatis
+//		user.setFavorite(preference.toString());
+//		accountService.updateFavorite(user);
 		
 		return Action.NONE;
 	}

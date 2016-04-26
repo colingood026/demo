@@ -62,23 +62,20 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 		}else if(COL_NO.length()!=0){
 			item=dao.select_by_1condition("COL_NO",COL_NO);
 		}
+		//jdbc end
 		//mybatis
 //		Map<String,Object> map=new HashMap<String,Object>();
 //		if(MAT_01==null&&COL_NO==null){			
-//			item=iNV_ITEM_Service.select_INV_ITEM(map);				
 //		}else if(MAT_01.length()!=0&&COL_NO.length()!=0){
 //			map.put("COL_NO", COL_NO);
-//			map.put("MAT_01", MAT_01);
-//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//			map.put("MAT_01", MAT_01);			
 //		}else if(MAT_01.length()!=0){
-//			map.put("MAT_01", MAT_01);
-//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//			map.put("MAT_01", MAT_01);			
 //		}else if(COL_NO.length()!=0){
-//			map.put("COL_NO", COL_NO);
-//			item=iNV_ITEM_Service.select_INV_ITEM(map);
+//			map.put("COL_NO", COL_NO);			
 //		}
-		
-		
+//		item=iNV_ITEM_Service.select_INV_ITEM(map);
+		//mybatis end
 		
 		if(item!=null){			
 			String jsonString=ConvertToJson.toJson(item);			
