@@ -31,8 +31,8 @@
 	        <a onclick="onBtExport()" id='excel' class='css_btn'>匯出到Excel</a>
 	    </label>
 		<!-- 資料篩選 -->
-	    <input placeholder="請輸入篩選條件" type="text"
-	           onchange="onFilterChanged(this.value)" id='filter'/>
+		<a id='filterButton' class='css_btn'>篩選</a>
+	    <input placeholder="請輸入篩選條件" type="text" id='filter'/>
   	</div>
   	<!--  -->
   	<div id='blankDiv'></div>	

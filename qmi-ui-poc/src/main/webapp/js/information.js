@@ -36,8 +36,10 @@
 			enableColResize:true,
 		};		
 		//使用者輸入篩選條件
-		function onFilterChanged(value) {
-		    gridOptions.api.setQuickFilter(value);		  
+		$('#filterButton').on('click',onFilterChanged);
+		function onFilterChanged() {
+			var filter=$('#filter').val();
+		    gridOptions.api.setQuickFilter(filter);		  
 		}
 		//搜尋基準料號，色號
 
