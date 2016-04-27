@@ -1,4 +1,4 @@
-package model;
+package JDBC;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -20,6 +20,7 @@ import org.json.JSONArray;
 
 import com.google.common.base.Stopwatch;
 
+import model.INV_ITEM_VO;
 import util.ConvertToJson;
 import util.jdbcClose;
 

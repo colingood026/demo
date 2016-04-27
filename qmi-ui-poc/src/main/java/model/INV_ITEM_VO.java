@@ -15,7 +15,8 @@ public class INV_ITEM_VO {
 		return REC_DATE;
 	}
 	public void setREC_DATE(java.util.Date rEC_DATE) {
-		REC_DATE = rEC_DATE;
+		long time=rEC_DATE.getTime();
+		REC_DATE = new java.sql.Date(time);
 	}
 	public String getPUR_NO() {
 		return PUR_NO;

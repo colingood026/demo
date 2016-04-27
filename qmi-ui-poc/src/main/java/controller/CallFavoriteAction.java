@@ -19,7 +19,7 @@ import org.json.JSONArray;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-import model.account_jdbcDAO;
+import JDBC.account_jdbcDAO;
 import model.accountVO;
 
 public class CallFavoriteAction extends ActionSupport implements SessionAware,ServletResponseAware {

@@ -9,7 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-import model.account_jdbcDAO;
+import JDBC.account_jdbcDAO;
 import model.accountVO;
 import myBatis.accountService;
 import net.sf.json.JSONArray;

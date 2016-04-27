@@ -13,7 +13,7 @@ import com.google.common.base.Stopwatch;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-import model.INV_ITEM_jdbcDAO;
+import JDBC.INV_ITEM_jdbcDAO;
 import model.INV_ITEM_VO;
 import myBatis.INV_ITEM_Service;
 import util.ConvertToJson;
