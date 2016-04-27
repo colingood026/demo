@@ -1,7 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,19 +50,24 @@ public class CallFavoriteAction extends ActionSupport implements SessionAware,Se
 		accountVO user=(accountVO)session.get("bean");
 
 		String preference=user.getFavorite();
-		Map<String,String> map=new HashMap<String,String>();
+		Map<Integer,String> map=new HashMap<Integer,String>();
+		SortedMap<Integer, String> sortedMap=null;
 		String jsonString=null;
 		if(preference==null){
-			map.put("none", "none");
+			int i=99;
+			map.put(i, "none");
 			jsonString=mapper.writeValueAsString(map);			
 		}else{			
 			int i=1;
 			for(String a:preference.split(",")){
-				map.put("k"+i, a);
+				map.put(i, a);
 				i++;
 			}			
-			jsonString=mapper.writeValueAsString(map);			
+			sortedMap=new TreeMap<Integer,String>();
+			sortedMap.putAll(map);			
+			jsonString=mapper.writeValueAsString(sortedMap);			
 		}
+		System.out.println("sortedMap="+sortedMap);
 		response.getWriter().print(jsonString);
 		response.getWriter().flush();
 		response.getWriter().close();

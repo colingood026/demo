@@ -63,11 +63,11 @@
 			var change=gridOptions.columnApi.getColumnState();//取得目前的欄位名稱
 			var newColumn=[];//要存入DB的欄位
 			$.each(change,function(key,value){
-				console.log('value.colId='+value.colId);
+
 				newColumn.push(value.colId);				
 			})			
 			var jsonString=JSON.stringify(newColumn);
-			console.log('jsonString='+jsonString);
+
 			//呼叫ajax，將使用者的習慣存入DB
 			$.post('SaveFavoriteAction.action',{'newColumn':jsonString},function(){});
 		};
@@ -100,22 +100,20 @@
 			//呼叫使用者上次移動的欄位位置
 			$.get('CallFavoriteAction.action',{},function(data){
 				//如果使用者上次有移動才重新配置欄位
-				if(data.none!='none'){
+				if(data['99']!='none'){
 					var newcolumnDefs=[];//新的欄位位置
 					$.each(data,function(key,value){
-						if(key!='none'){
-							if(value=='index'){
-								newcolumnDefs.push({headerName: getColumnName(value), field: value, width: 100, cellRenderer: function(params) {
-							    	 return params.node.id + 1;
-							     } });
-							}else{
-								newcolumnDefs.push({headerName: getColumnName(value), field: value});
-							}
-							gridOptions.api.setColumnDefs(newcolumnDefs);
-							gridOptions.api.sizeColumnsToFit();
-						}												
+						if(value=='index'){
+							newcolumnDefs.push({headerName: getColumnName(value), field: value, width: 100, cellRenderer: function(params) {
+						    	 return params.node.id + 1;
+						     } });
+						}else{
+							newcolumnDefs.push({headerName: getColumnName(value), field: value});
+						}
+						gridOptions.api.setColumnDefs(newcolumnDefs);
+						gridOptions.api.sizeColumnsToFit();											
 					})
-				}			
+				}				
 			})			
 		})
 
