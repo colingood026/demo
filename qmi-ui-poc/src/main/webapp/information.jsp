@@ -42,6 +42,7 @@
 <script src="js/ag-grid-enterprise.js"></script>
 
 <script src="js/jquery-2.2.3.js"></script>
-<script src="js/information.js"></script>
+<!-- <script src="js/information.js"></script> -->
+<script src="js/informationForIE.js"></script>
 </body>
 </html>
