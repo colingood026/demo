@@ -23,19 +23,19 @@ public class account_jdbcDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	private static final ObjectMapper mapper = new ObjectMapper();
 	//
-	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
-	private final String USER="sa";
-	private final String PASSWORD="123qweaS";
+//	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
+//	private final String USER="sa";
+//	private final String PASSWORD="123qweaS";
 	//DataSource
-//	private DataSource ds=null;
-//	public accountDAO(){
-//		try {
-//			Context ctx=new InitialContext();
-//			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
-//		} catch (NamingException e) {			
-//			e.printStackTrace();
-//		}
-//	}	
+	private DataSource ds=null;
+	public account_jdbcDAO(){
+		try {
+			Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
+		} catch (NamingException e) {			
+			e.printStackTrace();
+		}
+	}	
 	
 	private final String SELECT_BY_ID="select * from account where account=?";
 	public accountVO select_by_id(String id){
@@ -46,8 +46,9 @@ public class account_jdbcDAO {
 		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(SELECT_BY_ID);
 			
 			stmt.setString(1, id);
@@ -79,8 +80,9 @@ public class account_jdbcDAO {
 		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(INSERT);
 			stmt.setString(1, favorite);
 			stmt.setString(2, account);

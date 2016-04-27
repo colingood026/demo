@@ -1,19 +1,19 @@
 
 		//預設欄位位置
 		var columnDefs=[
-		     {headerName: "#",field:'index', width: 100, cellRenderer: function(params) {
+		     {headerName: "#",field:'index',filterParams:{newRowsAction:'keep'}, width: 100, cellRenderer: function(params) {
 		    	 return params.node.id + 1;
 		     } },
-            {headerName: "收料日期", field: "rec_DATE"},	
-            {headerName: "採購單號", field: "pur_NO"},	
-            {headerName: "基準料號", field: "mat_01"},
-            {headerName: "色號", field: "col_NO"},
-            {headerName: "幅寬", field: "wid_TH"},
-            {headerName: "箱號", field: "cnt_NO"},
-            {headerName: "缸號", field: "lot_ID"},
-            {headerName: "儲位", field: "loc_CODE"},
-            {headerName: "庫存量", field: "stock_QTY"},
-            {headerName: "庫存單位", field: "unt_RQ"},			
+            {headerName: "收料日期", field: "rec_DATE",filterParams:{newRowsAction:'keep'}},	
+            {headerName: "採購單號", field: "pur_NO",filterParams:{newRowsAction:'keep'}},	
+            {headerName: "基準料號", field: "mat_01",filterParams:{newRowsAction:'keep'}},
+            {headerName: "色號", field: "col_NO",filterParams:{newRowsAction:'keep'}},
+            {headerName: "幅寬", field: "wid_TH",filterParams:{newRowsAction:'keep'}},
+            {headerName: "箱號", field: "cnt_NO",filterParams:{newRowsAction:'keep'}},
+            {headerName: "缸號", field: "lot_ID",filterParams:{newRowsAction:'keep'}},
+            {headerName: "儲位", field: "loc_CODE",filterParams:{newRowsAction:'keep'}},
+            {headerName: "庫存量", field: "stock_QTY",filterParams:{newRowsAction:'keep'}},
+            {headerName: "庫存單位", field: "unt_RQ",filterParams:{newRowsAction:'keep'}},			
 		];
 		
 		//grid設定
@@ -104,11 +104,11 @@
 					var newcolumnDefs=[];//新的欄位位置
 					$.each(data,function(key,value){
 						if(value=='index'){
-							newcolumnDefs.push({headerName: getColumnName(value), field: value, width: 100, cellRenderer: function(params) {
+							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}, width: 100, cellRenderer: function(params) {
 						    	 return params.node.id + 1;
 						     } });
 						}else{
-							newcolumnDefs.push({headerName: getColumnName(value), field: value});
+							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}});
 						}
 						gridOptions.api.setColumnDefs(newcolumnDefs);
 						gridOptions.api.sizeColumnsToFit();											

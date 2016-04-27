@@ -28,19 +28,19 @@ public class INV_ITEM_jdbcDAO {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static ConvertToJson ConvertToJson=new ConvertToJson();
 	//
-	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
-	private final String USER="sa";
-	private final String PASSWORD="123qweaS";
+//	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
+//	private final String USER="sa";
+//	private final String PASSWORD="123qweaS";
 	//DataSource
-//	private DataSource ds=null;
-//	public equipmentDAO(){
-//		try {
-//			Context ctx=new InitialContext();
-//			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
-//		} catch (NamingException e) {			
-//			e.printStackTrace();
-//		}
-//	}
+	private DataSource ds=null;
+	public INV_ITEM_jdbcDAO(){
+		try {
+			Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/xxx");
+		} catch (NamingException e) {			
+			e.printStackTrace();
+		}
+	}
 	//SELECT_ALL
 	private static final String SELECT_ALL="select * from INV_ITEM ";
 	public List<INV_ITEM_VO> select_all(){
@@ -50,8 +50,9 @@ public class INV_ITEM_jdbcDAO {
 		ResultSet rs=null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(SELECT_ALL);
 			rs=stmt.executeQuery();
 			result=getResult(result,rs);
@@ -75,8 +76,9 @@ public class INV_ITEM_jdbcDAO {
 		getCol(sb,column);		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(sb.toString());
 			stmt.setString(1, value);
 			rs=stmt.executeQuery();			
@@ -102,8 +104,9 @@ public class INV_ITEM_jdbcDAO {
 		getCol(sb,column2);
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn=DriverManager.getConnection(URL, USER, PASSWORD);
-//			conn=ds.getConnection();
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();
 			stmt=conn.prepareStatement(sb.toString());
 			stmt.setString(1, value1);
 			stmt.setString(2, value2);
