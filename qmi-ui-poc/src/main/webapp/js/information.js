@@ -41,10 +41,14 @@
 			var filter=$('#filter').val();
 		    gridOptions.api.setQuickFilter(filter);		  
 		}
-		//搜尋基準料號，色號
-
+		//搜尋基準料號，色號		
 		$('#buyNoButton').on('click',getData);		
 		function getData(){
+			if(gridOptions.api){
+				gridOptions.api.destroy();
+			}
+			gridOptions.suppressLoadingOverlay=false;			
+			createGrid();
 			var MAT_01=$('#MAT_01').val();
 			var COL_NO=$('#COL_NO').val();
 			if(MAT_01.length==0&&COL_NO.length==0){
@@ -57,9 +61,6 @@
 				});	
 			}
 		}
-		
-		
-		
 		//欄位移動
 		function columnHandler(event){
 			var change=gridOptions.columnApi.getColumnState();//取得目前的欄位名稱
@@ -91,14 +92,8 @@
 			}
 		}
 		//頁面載入時接收資料
-		$(function(){
-			var gridDiv=document.querySelector('#myGrid');
-			//建立表格
-			new agGrid.Grid(gridDiv, gridOptions);
-			gridOptions.api.setColumnDefs(columnDefs);
-			gridOptions.api.sizeColumnsToFit();	
-			//欄位移動時觸發
-			gridOptions.api.addEventListener('columnMoved',columnHandler);
+		
+		$(function(){			
 			//呼叫料號
 			$.post('CallMAT_01Action.action',{},function(data){
 				$.each(data,function(key,value){					
@@ -106,12 +101,23 @@
 						$('#MAT_Select').append($('<option/>').text(value2));
 					})
 				})
-			})
+			})						
+			createGrid();			
+		})
+		//
+		function createGrid(){
+			var gridDiv=document.querySelector('#myGrid');
+			//建立表格
+			new agGrid.Grid(gridDiv, gridOptions);			
+			gridOptions.api.setColumnDefs(columnDefs);			
+			gridOptions.api.sizeColumnsToFit();
+			//欄位移動時觸發
+			gridOptions.api.addEventListener('columnMoved',columnHandler);
 			//呼叫使用者上次移動的欄位位置
 			$.get('CallFavoriteAction.action',{},function(data){
+				var newcolumnDefs=[];//新的欄位位置
 				//如果使用者上次有移動才重新配置欄位
-				if(data['99']!='none'){
-					var newcolumnDefs=[];//新的欄位位置
+				if(data['99']!='none'){									
 					$.each(data,function(key,value){
 						if(value=='index'){
 							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}, width: 100, cellRenderer: function(params) {
@@ -119,14 +125,13 @@
 						     } });
 						}else{
 							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}});
-						}
-						gridOptions.api.setColumnDefs(newcolumnDefs);
-						gridOptions.api.sizeColumnsToFit();											
+						}																
 					})
+					gridOptions.api.setColumnDefs(newcolumnDefs);			
+					gridOptions.api.sizeColumnsToFit();
 				}				
-			})			
-		})
-
+			})
+		}
 		//按下ctrl+f時聚焦到指定的地方
 		function keyDown(e){
 			//判斷瀏覽器
