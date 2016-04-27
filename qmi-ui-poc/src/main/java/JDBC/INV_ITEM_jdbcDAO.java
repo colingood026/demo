@@ -122,6 +122,34 @@ public class INV_ITEM_jdbcDAO {
 		}		
 		return result;
 	}
+	//料號去除重複
+	private static final String DistinctMAT_01="select distinct MAT_01 from INV_ITEM";
+	public List<String> distinctMAT_01(){
+		List<String> result=new ArrayList<String>();
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//			conn=DriverManager.getConnection(URL, USER, PASSWORD);
+			//DataSource
+			conn=ds.getConnection();		
+			stmt=conn.prepareStatement(DistinctMAT_01);
+			rs=stmt.executeQuery();
+			while(rs.next()){				
+				result.add(rs.getString("MAT_01"));								
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO:[colin.lee], Auto-generated try catch stub
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO:[colin.lee], Auto-generated try catch stub
+			e.printStackTrace();
+		}finally{
+			jdbcClose.allClose(conn, stmt, rs);
+		}	
+		return result;
+	}
 	//for 動態查詢
 	private StringBuilder getCol(StringBuilder sb,String column){
 		if(column=="COL_NO"){
@@ -154,11 +182,11 @@ public class INV_ITEM_jdbcDAO {
 	public static void main(String args[]){
 		INV_ITEM_jdbcDAO dao=new INV_ITEM_jdbcDAO();
 		
-		List<INV_ITEM_VO> allEquip=dao.select_by_2condition("MAT_01","S-2727","COL_NO","001-BT");
-		INV_ITEM_VO bean=new INV_ITEM_VO();
+		System.out.println(dao.distinctMAT_01().size());
+		
 		
 
-		System.out.println(bean.getCNT_NO());
+		
 		
 		
 		

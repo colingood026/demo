@@ -16,6 +16,9 @@
 	#blankDiv{
 		height:30px;
 	}
+	#MAT_Select{
+		width:20px;
+	}
 	#filterButton{
 		margin-right:5px;
   		float:right;	

@@ -99,6 +99,14 @@
 			gridOptions.api.sizeColumnsToFit();	
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
+			//呼叫料號
+			$.post('CallMAT_01Action.action',{},function(data){
+				$.each(data,function(key,value){					
+					$.each(value,function(index,value2){
+						$('#MAT_Select').append($('<option/>').text(value2));
+					})
+				})
+			})
 			//呼叫使用者上次移動的欄位位置
 			$.get('CallFavoriteAction.action',{},function(data){
 				//如果使用者上次有移動才重新配置欄位
@@ -146,5 +154,9 @@
 		function signOut(){			
 			location.href="signout.jsp";
 		}
-	
-	
+		//下拉選單
+		$('#MAT_Select').on('change',MAT_Select);
+		function MAT_Select(){
+			var option=$('#MAT_Select>option:selected').text();
+			$('#MAT_01').val(option);
+		}

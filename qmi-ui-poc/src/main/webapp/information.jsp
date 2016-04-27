@@ -21,6 +21,7 @@
 	<!--  -->
 	<div class='searchContainer'>
 		<input type='text' placeholder='請輸入基準料號' id='MAT_01'>
+		<select id='MAT_Select'></select>
 		<input type='text' placeholder='請輸入色號' id='COL_NO'>
 		<a id='buyNoButton' class='css_btn'>搜尋</a>		
 	           

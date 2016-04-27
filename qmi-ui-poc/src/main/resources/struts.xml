@@ -33,7 +33,9 @@
 		
 		<action name="CallFavoriteAction" class="controller.CallFavoriteAction">
 		</action>
-			
+		<action name="CallMAT_01Action" class="controller.CallMAT_01Action">
+		
+		</action>
     </package>
 	
 	
