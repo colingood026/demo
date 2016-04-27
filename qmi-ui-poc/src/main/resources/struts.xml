@@ -21,17 +21,17 @@
         </action>
         
         <!--  -->
-        <action name="INV_ITEM_Action" class="model.INV_ITEM_Action">
+        <action name="INV_ITEM_Action" class="controller.INV_ITEM_Action">
 		</action>
 		
-		<action name="LoginAction" class="model.LoginAction">
+		<action name="LoginAction" class="controller.LoginAction">
 			<result name='success'>information.jsp</result>
 			<result name='error'>/WEB-INF/jsp/index.jsp</result>
 		</action>
-		<action name="SaveFavoriteAction" class="model.SaveFavoriteAction">		
+		<action name="SaveFavoriteAction" class="controller.SaveFavoriteAction">		
 		</action>
 		
-		<action name="CallFavoriteAction" class="model.CallFavoriteAction">
+		<action name="CallFavoriteAction" class="controller.CallFavoriteAction">
 		</action>
 			
     </package>

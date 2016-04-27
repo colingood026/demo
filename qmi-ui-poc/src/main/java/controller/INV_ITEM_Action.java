@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,10 @@ import com.google.common.base.Stopwatch;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import model.INV_ITEM_jdbcDAO;
+import model.INV_ITEM_VO;
 import myBatis.INV_ITEM_Service;
+import util.ConvertToJson;
 
 public class INV_ITEM_Action extends ActionSupport implements ServletResponseAware {
 	/**
@@ -37,7 +40,7 @@ public class INV_ITEM_Action extends ActionSupport implements ServletResponseAwa
 	//json
 	private ConvertToJson ConvertToJson=new ConvertToJson();
 	//jdbc
-	private INV_ITEM_DAO dao=new INV_ITEM_DAO();
+	private INV_ITEM_jdbcDAO dao=new INV_ITEM_jdbcDAO();
 	//mybatis
 //	private INV_ITEM_Service iNV_ITEM_Service=new INV_ITEM_Service();
 

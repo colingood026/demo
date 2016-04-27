@@ -20,14 +20,17 @@ import org.json.JSONArray;
 
 import com.google.common.base.Stopwatch;
 
-public class INV_ITEM_DAO {
+import util.ConvertToJson;
+import util.jdbcClose;
+
+public class INV_ITEM_jdbcDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static ConvertToJson ConvertToJson=new ConvertToJson();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
-	private final String PASSWORD="sa123456";
+	private final String PASSWORD="123qweaS";
 	//DataSource
 //	private DataSource ds=null;
 //	public equipmentDAO(){
@@ -145,7 +148,7 @@ public class INV_ITEM_DAO {
 	}
 	//-------------------test------------------------
 	public static void main(String args[]){
-		INV_ITEM_DAO dao=new INV_ITEM_DAO();
+		INV_ITEM_jdbcDAO dao=new INV_ITEM_jdbcDAO();
 		
 		List<INV_ITEM_VO> allEquip=dao.select_by_2condition("MAT_01","S-2727","COL_NO","001-BT");
 		INV_ITEM_VO bean=new INV_ITEM_VO();

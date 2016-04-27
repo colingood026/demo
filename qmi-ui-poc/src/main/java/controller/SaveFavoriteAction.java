@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 
 
@@ -9,6 +9,8 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import model.account_jdbcDAO;
+import model.accountVO;
 import myBatis.accountService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -21,7 +23,7 @@ public class SaveFavoriteAction extends ActionSupport implements SessionAware {
 	 */
 	private static final long serialVersionUID = 1L;
 	//jdbc
-	private accountDAO accountDAO=new accountDAO();
+	private account_jdbcDAO accountDAO=new account_jdbcDAO();
 	//mybatis
 //	private accountService accountService=new accountService();
 	private String newColumn;

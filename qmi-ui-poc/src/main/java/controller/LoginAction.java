@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.util.Map;
 
@@ -8,6 +8,9 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
+import model.account_jdbcDAO;
+import model.accountVO;
+
 public class LoginAction extends ActionSupport implements SessionAware,RequestAware{
 
 	/**
@@ -15,7 +18,7 @@ public class LoginAction extends ActionSupport implements SessionAware,RequestAw
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private accountDAO dao=new accountDAO();
+	private account_jdbcDAO dao=new account_jdbcDAO();
 
 	private String accout;
 	private String password;

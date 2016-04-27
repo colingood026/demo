@@ -17,13 +17,15 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class accountDAO {
+import util.jdbcClose;
+
+public class account_jdbcDAO {
 	private jdbcClose jdbcClose=new jdbcClose();
 	private static final ObjectMapper mapper = new ObjectMapper();
 	//
 	private final String URL="jdbc:sqlserver://localhost:1433;databaseName=QMI_POC";
 	private final String USER="sa";
-	private final String PASSWORD="sa123456";
+	private final String PASSWORD="123qweaS";
 	//DataSource
 //	private DataSource ds=null;
 //	public accountDAO(){
@@ -103,7 +105,7 @@ public class accountDAO {
 	
 	//--------------------------
 	public static void main(String args[]){
-		accountDAO dao=new accountDAO();
+		account_jdbcDAO dao=new account_jdbcDAO();
 		accountVO user=dao.select_by_id("Alex");
 		try {
 			//

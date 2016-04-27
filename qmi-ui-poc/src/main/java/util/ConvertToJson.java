@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.google.common.base.Stopwatch;
+
+import model.INV_ITEM_VO;
 
 public class ConvertToJson {
 	private static final ObjectMapper mapper = new ObjectMapper();
