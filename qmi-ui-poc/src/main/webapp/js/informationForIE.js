@@ -38,20 +38,27 @@
 			rowModelType: 'pagination'
 		};		
 		//使用者輸入篩選條件
-		function onFilterChanged(value) {
-		    gridOptions.api.setQuickFilter(value);		  
+		$('#filterButton').on('click',onFilterChanged);
+		function onFilterChanged() {
+			var filter=$('#filter').val();
+		    gridOptions.api.setQuickFilter(filter);		  
 		}
-		//搜尋基準料號，色號
+		//搜尋基準料號，色號		
 		$('#buyNoButton').on('click',getData);		
 		function getData(){
+			if(gridOptions.api){
+				gridOptions.api.destroy();
+			}
+			gridOptions.suppressLoadingOverlay=false;			
+			createGrid();
 			var MAT_01=$('#MAT_01').val();
 			var COL_NO=$('#COL_NO').val();
 			if(MAT_01.length==0&&COL_NO.length==0){
-				$.post('INV_ITEM_Action.action',{},function(data){
+				$.post('INV_ITEM_Action.action',{},function(data){					
 					setRowData(data);
 				});
 			}else{
-				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){
+				$.post('INV_ITEM_Action.action',{'MAT_01':MAT_01,'COL_NO':COL_NO},function(data){			
 					setRowData(data);
 				});	
 			}
@@ -88,19 +95,32 @@
 			}
 		}
 		//頁面載入時接收資料
-		$(function(){
+		
+		$(function(){			
+			//呼叫料號
+			$.post('CallMAT_01Action.action',{},function(data){
+				$.each(data,function(key,value){					
+					$.each(value,function(index,value2){
+						$('#MAT_Select').append($('<option/>').text(value2));
+					})
+				})
+			})						
+			createGrid();			
+		})
+		//
+		function createGrid(){
 			var gridDiv=document.querySelector('#myGrid');
 			//建立表格
-			new agGrid.Grid(gridDiv, gridOptions);
-			gridOptions.api.setColumnDefs(columnDefs);
-			gridOptions.api.sizeColumnsToFit();	
+			new agGrid.Grid(gridDiv, gridOptions);			
+			gridOptions.api.setColumnDefs(columnDefs);			
+			gridOptions.api.sizeColumnsToFit();
 			//欄位移動時觸發
 			gridOptions.api.addEventListener('columnMoved',columnHandler);
 			//呼叫使用者上次移動的欄位位置
 			$.get('CallFavoriteAction.action',{},function(data){
+				var newcolumnDefs=[];//新的欄位位置
 				//如果使用者上次有移動才重新配置欄位
-				if(data['99']!='none'){
-					var newcolumnDefs=[];//新的欄位位置
+				if(data['99']!='none'){									
 					$.each(data,function(key,value){
 						if(value=='index'){
 							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}, width: 100, cellRenderer: function(params) {
@@ -108,13 +128,13 @@
 						     } });
 						}else{
 							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}});
-						}
-						gridOptions.api.setColumnDefs(newcolumnDefs);
-						gridOptions.api.sizeColumnsToFit();											
+						}																
 					})
+					gridOptions.api.setColumnDefs(newcolumnDefs);			
+					gridOptions.api.sizeColumnsToFit();
 				}				
-			})			
-		})
+			})
+		}
 		//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓分頁↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		var pageSize = 50000;//一頁顯示多少筆資料
 		var allOfTheData;
@@ -170,5 +190,10 @@
 		function signOut(){			
 			location.href="signout.jsp";
 		}
-	
+		//下拉選單
+		$('#MAT_Select').on('change',MAT_Select);
+		function MAT_Select(){
+			var option=$('#MAT_Select>option:selected').text();
+			$('#MAT_01').val(option);
+		}	
 	
