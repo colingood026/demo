@@ -153,6 +153,15 @@
 		//excel
 		function onBtExport(){
 			var params={};
+			params.processCellCallback=function(params){
+				if(params.column.getColDef().field!='rec_DATE'&&params.column.getColDef().field!='wid_TH'
+					&&params.column.getColDef().field!='stock_QTY'){
+						if(params.value!=null){
+							return '"'+params.value+'"';
+						}
+				}				
+				return params.value;
+			}
 			gridOptions.api.exportDataAsCsv(params);
 		}
 		//登出
