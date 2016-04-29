@@ -4,16 +4,16 @@
 		     {headerName: "#",field:'index',filterParams:{newRowsAction:'keep'}, width: 100, cellRenderer: function(params) {
 		    	 return params.node.id + 1;
 		     } },
-            {headerName: "收料日期", field: "rec_DATE",filterParams:{newRowsAction:'keep'}},	
-            {headerName: "採購單號", field: "pur_NO",filterParams:{newRowsAction:'keep'}},	
-            {headerName: "基準料號", field: "mat_01",filterParams:{newRowsAction:'keep'}},
-            {headerName: "色號", field: "col_NO",filterParams:{newRowsAction:'keep'}},
-            {headerName: "幅寬", field: "wid_TH",filterParams:{newRowsAction:'keep'}},
-            {headerName: "箱號", field: "cnt_NO",filterParams:{newRowsAction:'keep'}},
-            {headerName: "缸號", field: "lot_ID",filterParams:{newRowsAction:'keep'}},
-            {headerName: "儲位", field: "loc_CODE",filterParams:{newRowsAction:'keep'}},
-            {headerName: "庫存量", field: "stock_QTY",filterParams:{newRowsAction:'keep'}},
-            {headerName: "庫存單位", field: "unt_RQ",filterParams:{newRowsAction:'keep'}},			
+            {headerName: "收料日期", field: "rec_DATE",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},	
+            {headerName: "採購單號", field: "pur_NO",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},	
+            {headerName: "基準料號", field: "mat_01",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "色號", field: "col_NO",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "幅寬", field: "wid_TH",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "箱號", field: "cnt_NO",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "缸號", field: "lot_ID",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "儲位", field: "loc_CODE",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "庫存量", field: "stock_QTY",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},
+            {headerName: "庫存單位", field: "unt_RQ",filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged},			
 		];
 		
 		//grid設定
@@ -34,6 +34,8 @@
 			rowGroupPanelShow:'onlyWhenGrouping',
 			//
 			enableColResize:true,
+			//右鍵的選單
+			getContextMenuItems:getContextMenuItems,
 		};		
 		//使用者輸入篩選條件
 		$('#filterButton').on('click',onFilterChanged);
@@ -104,7 +106,7 @@
 			})						
 			createGrid();			
 		})
-		//
+		//初始化表格
 		function createGrid(){
 			var gridDiv=document.querySelector('#myGrid');
 			//建立表格
@@ -124,7 +126,7 @@
 						    	 return params.node.id + 1;
 						     } });
 						}else{
-							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'}});
+							newcolumnDefs.push({headerName: getColumnName(value), field: value,filterParams:{newRowsAction:'keep'},editable:true,onCellValueChanged:onCellValueChanged});
 						}																
 					})
 					gridOptions.api.setColumnDefs(newcolumnDefs);			
@@ -176,4 +178,26 @@
 		function MAT_Select(){
 			var option=$('#MAT_Select>option:selected').text();
 			$('#MAT_01').val(option);
+		}
+		//右鍵內容
+		function getContextMenuItems(params){
+			var result = params.defaultItems.splice(0);
+			result.push(
+				{
+					name:'this is :'+ params.value,
+			    	action:function(){
+			    		alert('You click '+ params.value);
+			    	}
+				}
+			)					
+			return result;
+		}
+		//欄位修改之後做的事
+		function onCellValueChanged(params){
+			console.log('params='+params);
+			console.log('params.data.col_NO='+params.data.col_NO);
+			//如果有改變才執行
+//			if(params.oldValue!=params.newValue){
+//				console.log('bbb changed');
+//			}
 		}

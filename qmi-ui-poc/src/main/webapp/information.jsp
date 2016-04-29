@@ -18,7 +18,8 @@
 <body>
 	<!-- 歡迎使用者 -->
 	<h1>Hello! ${bean.account}</h1><br/>
-	<!--  -->	
+	<!--  -->
+
 	<div class='searchContainer'>
 		<input type='text' placeholder='請輸入基準料號' id='MAT_01'>
 		<select id='MAT_Select'></select>
