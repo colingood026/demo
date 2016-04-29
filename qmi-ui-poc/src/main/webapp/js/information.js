@@ -159,7 +159,10 @@
 						if(params.value!=null){
 							return '"'+params.value+'"';
 						}
-				}				
+				}
+				if(params.column.getColDef().field=='index'){
+					return params.node.id + 1;
+				}
 				return params.value;
 			}
 			gridOptions.api.exportDataAsCsv(params);
